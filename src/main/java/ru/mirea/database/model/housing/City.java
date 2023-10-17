@@ -1,12 +1,11 @@
-package ru.mirea.database.model;
+package ru.mirea.database.model.housing;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.mirea.database.model.housing.Country;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
@@ -14,7 +13,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Data
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-public class Region {
+public class City {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -24,11 +23,12 @@ public class Region {
     @Size(max = 20)
     private String name;
 
-//    @OneToMany(mappedBy = "region")
-//    private List<Country> countries;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
-    public Region(String name) {
+    public City(String name, Country country) {
         this.name = name;
+        this.country = country;
     }
-
 }

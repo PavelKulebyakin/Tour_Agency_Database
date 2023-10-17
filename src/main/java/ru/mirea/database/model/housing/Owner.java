@@ -1,4 +1,4 @@
-package ru.mirea.database.model;
+package ru.mirea.database.model.housing;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
