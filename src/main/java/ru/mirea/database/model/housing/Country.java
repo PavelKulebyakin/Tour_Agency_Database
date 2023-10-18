@@ -2,6 +2,7 @@ package ru.mirea.database.model.housing;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Country {
     @Size(max = 20)
     private String name;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
