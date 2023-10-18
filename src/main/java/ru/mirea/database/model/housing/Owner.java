@@ -2,6 +2,7 @@ package ru.mirea.database.model.housing;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Owner {                                        // TODO: 17.10.2023 
     @Size(max = 100)
     private String email;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
