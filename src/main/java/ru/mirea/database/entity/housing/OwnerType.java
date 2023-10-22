@@ -1,4 +1,4 @@
-package ru.mirea.database.model.housing;
+package ru.mirea.database.entity.housing;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Data
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-public class Region {
+public class OwnerType {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -24,10 +24,7 @@ public class Region {
     @Size(max = 20)
     private String name;
 
-//    @OneToMany(mappedBy = "region")
-//    private List<Country> countries;
-
-    public Region(String name) {
+    public OwnerType(String name) {
         this.name = name;
     }
 
