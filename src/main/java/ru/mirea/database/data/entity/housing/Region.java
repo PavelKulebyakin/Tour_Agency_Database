@@ -1,4 +1,4 @@
-package ru.mirea.database.entity.housing;
+package ru.mirea.database.data.entity.housing;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
