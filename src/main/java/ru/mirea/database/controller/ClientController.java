@@ -1,6 +1,7 @@
 package ru.mirea.database.controller;
 
 import java.util.Optional;
+
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mirea.database.data.entity.booking.Client;
 import ru.mirea.database.service.ClientService;
+
 import java.util.NoSuchElementException;
 import java.util.List;
 
@@ -24,20 +26,17 @@ public class ClientController {
     }
 
     @PostMapping("/client/register")
-    public ResponseEntity<Client>registerUser(@RequestBody @Valid Client client)
-    {
+    public ResponseEntity<Client> registerClient(@RequestBody @Valid Client client) {
         return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
     }
 
     @GetMapping("/client")
-    public ResponseEntity<List<Client>>getUsers()
-    {
+    public ResponseEntity<List<Client>> getClients() {
         return new ResponseEntity<>(clientService.allClients(), HttpStatus.OK);
     }
 
     @GetMapping("/client/{id}")
-    public ResponseEntity<Optional<Client>>getUserById(@PathVariable Long id) throws NoSuchElementException
-    {
+    public ResponseEntity<Optional<Client>> getClientById(@PathVariable Long id) throws NoSuchElementException {
         return new ResponseEntity<>(clientService.getClientById(id), HttpStatus.FOUND);
     }
 
