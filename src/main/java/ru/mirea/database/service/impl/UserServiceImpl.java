@@ -20,14 +20,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity getUserByUsername(String username) throws NoSuchElementException {
-        Optional<UserEntity> optional = userRepository.findByUsername(username);
-        return optional.orElseThrow(() -> new NoSuchElementException("User not found with username: " + username));
+    public Boolean existByUsername(String username) {
+        return userRepository.existsByUsername(username);
     }
 
     @Override
-    public Boolean existByUsername(String username) {
-        return userRepository.existsByUsername(username);
+    public UserEntity getUserByUsername(String username) throws NoSuchElementException {
+        Optional<UserEntity> optional = userRepository.findByUsername(username);
+        return optional.orElseThrow(() -> new NoSuchElementException("User not found with username: " + username));
     }
 
     @Override
