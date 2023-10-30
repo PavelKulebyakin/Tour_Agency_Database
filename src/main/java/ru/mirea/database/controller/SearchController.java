@@ -30,4 +30,14 @@ public class SearchController {
         Page<Housing> page = housingSearchService.search(housingSearchDTO, pageable);
         return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
     }
+
+    @PostMapping("housing/by_country/{COUNTRY_NAME}/{PAGE_NUM}/{PAGE_SIZE}")
+    public ResponseEntity<List<Housing>> searchHousingByCountry(@PathVariable(name = "COUNTRY_NAME") String countryName,
+                                                                @PathVariable(name = "PAGE_NUM") int pageNumber,
+                                                                @PathVariable(name = "PAGE_SIZE") int pageSize,
+                                                                @RequestBody HousingSearchDTO housingSearchDTO) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Housing> page = housingSearchService.searchByCountry(countryName, housingSearchDTO, pageable);
+        return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
+    }
 }

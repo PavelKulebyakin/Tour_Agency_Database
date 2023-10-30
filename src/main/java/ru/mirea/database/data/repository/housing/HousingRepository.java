@@ -12,5 +12,9 @@ public interface HousingRepository
         extends JpaRepository<Housing, Long>, JpaSpecificationExecutor<Housing> {
 
     @Query("SELECT h.name, h.numberOfRooms, h.addres, h.city.name, h.typeOfFood.name FROM Housing as h")
-    Page<Housing> findAll (Specification<Housing> specification, Pageable pageable);
+    Page<Housing> findAll(Specification<Housing> specification, Pageable pageable);
+
+    @Query("SELECT h.name, h.addres, h.city.name, h.city.country.name FROM Housing as h")
+    Page<Housing> findAllByCountry(Specification<Housing> specification, Pageable pageable);
+
 }

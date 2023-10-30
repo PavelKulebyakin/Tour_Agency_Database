@@ -1,11 +1,13 @@
 package ru.mirea.database.util;
 
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 import ru.mirea.database.data.entity.housing.Housing;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class HousingSpecificationBuilder {
 
     private final List<SearchCriteria> params;
@@ -43,5 +45,7 @@ public class HousingSpecificationBuilder {
 
         return result;
     }
+
+
 
 }

@@ -8,4 +8,6 @@ import ru.mirea.database.data.entity.housing.Housing;
 
 public interface HousingSearchService {
     Page<Housing> search(HousingSearchDTO housingSearchDTO, Pageable pageable);
+
+    Page<Housing> searchByCountry(String countryName, HousingSearchDTO housingSearchDTO, Pageable pageable);
 }
