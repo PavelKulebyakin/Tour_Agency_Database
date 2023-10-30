@@ -27,7 +27,10 @@ public class Amenities {
     @Size(max = 20)
     private String name;
 
-    @ManyToMany(mappedBy = "amenities")
-    private Set<Housing> housing;
+//    @ManyToMany(mappedBy = "amenities")
+//    private Set<Housing> housing;
 
+    public Amenities(String name) {
+        this.name = name;
+    }
 }
