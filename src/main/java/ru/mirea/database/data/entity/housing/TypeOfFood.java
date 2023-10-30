@@ -1,4 +1,4 @@
-package ru.mirea.database.model.housing;
+package ru.mirea.database.data.entity.housing;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Data
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-public class OwnerType {
+public class TypeOfFood {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -24,8 +24,7 @@ public class OwnerType {
     @Size(max = 20)
     private String name;
 
-    public OwnerType(String name) {
+    public TypeOfFood(String name) {
         this.name = name;
     }
-
 }
