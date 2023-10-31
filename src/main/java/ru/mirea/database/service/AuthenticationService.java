@@ -8,4 +8,6 @@ public interface AuthenticationService {
     void registerUser(RegisterDTO registerDTO);
 
     void loginUser(LoginDTO loginDTO);
+
+    boolean existByUsername(String username);
 }

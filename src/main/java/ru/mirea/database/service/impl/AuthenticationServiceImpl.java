@@ -36,6 +36,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
+    public void loginUser(LoginDTO loginDTO) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @Override
+    public boolean existByUsername(String username) {
+        return userService.existByUsername(username);
+    }
+
+    @Override
     public void registerUser(RegisterDTO registerDTO) {
         UserEntity user = UserEntity.builder()
                 .username(registerDTO.getUsername())
@@ -47,10 +59,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userService.saveUser(user);
     }
 
-    @Override
-    public void loginUser(LoginDTO loginDTO) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-    }
 }

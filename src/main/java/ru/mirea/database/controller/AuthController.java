@@ -13,12 +13,10 @@ import ru.mirea.database.service.UserService;
 @RequestMapping("api/auth")
 public class AuthController {
 
-    private final UserService userService;
     private final AuthenticationService authenticationService;
 
     @Autowired
-    public AuthController(UserService userService, AuthenticationService authenticationService) {
-        this.userService = userService;
+    public AuthController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
@@ -30,12 +28,12 @@ public class AuthController {
     @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO){
         authenticationService.loginUser(loginDTO);
-        return new ResponseEntity<>("User signed success.", HttpStatus.OK);
+        return new ResponseEntity<>("User signed successfully.", HttpStatus.OK);
     }
 
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
-        if(userService.existByUsername(registerDTO.getUsername())) {
+        if(authenticationService.existByUsername(registerDTO.getUsername())) {
             return new ResponseEntity<>("Username is taken", HttpStatus.BAD_REQUEST);
         }
         authenticationService.registerUser(registerDTO);
