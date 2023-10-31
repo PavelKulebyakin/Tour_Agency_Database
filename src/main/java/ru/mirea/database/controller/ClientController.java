@@ -25,11 +25,6 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @PostMapping("/client/register")
-    public ResponseEntity<Client> registerClient(@RequestBody @Valid Client client) {
-        return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
-    }
-
     @GetMapping("/client")
     public ResponseEntity<List<Client>> getClients() {
         return new ResponseEntity<>(clientService.allClients(), HttpStatus.OK);
@@ -39,5 +34,12 @@ public class ClientController {
     public ResponseEntity<Optional<Client>> getClientById(@PathVariable Long id) throws NoSuchElementException {
         return new ResponseEntity<>(clientService.getClientById(id), HttpStatus.FOUND);
     }
+
+    @PostMapping("/client/register")
+    public ResponseEntity<Client> registerClient(@RequestBody @Valid Client client) {
+        return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
+    }
+
+    // TODO: 31.10.2023 delete client method
 
 }
