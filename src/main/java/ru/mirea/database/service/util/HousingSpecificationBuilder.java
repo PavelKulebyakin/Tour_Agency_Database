@@ -1,5 +1,7 @@
-package ru.mirea.database.util;
+package ru.mirea.database.service.util;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import ru.mirea.database.data.entity.housing.Housing;
@@ -11,9 +13,11 @@ import java.util.List;
 public class HousingSpecificationBuilder {
 
     private final List<SearchCriteria> params;
+    private final EntityManager entityManager;
 
-    public HousingSpecificationBuilder() {
+    public HousingSpecificationBuilder(EntityManager entityManager) {
         this.params = new ArrayList<>();
+        this.entityManager = entityManager;
     }
 
     public final HousingSpecificationBuilder with(String key, String operation, Object value) {
@@ -33,7 +37,7 @@ public class HousingSpecificationBuilder {
 
     public Specification<Housing> build() {
 
-        if (params.isEmpty()) return null;
+        if (params.isEmpty()) return null;                                                                              // TODO: 04.11.2023 add default
 
         Specification<Housing> result = new HousingSpecification(params.get(0));
         for (int i = 1; i < params.size(); i++) {
@@ -42,6 +46,8 @@ public class HousingSpecificationBuilder {
                     ? Specification.where(result).or(new HousingSpecification(criteria))
                     : Specification.where(result).and(new HousingSpecification(criteria));
         }
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
         return result;
     }

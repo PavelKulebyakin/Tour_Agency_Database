@@ -4,18 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 import ru.mirea.database.data.dto.HousingSearchDTO;
 import ru.mirea.database.data.entity.housing.Housing;
 import ru.mirea.database.data.repository.housing.HousingRepository;
 import ru.mirea.database.service.HousingSearchService;
-import ru.mirea.database.util.HousingSpecificationBuilder;
-import ru.mirea.database.util.SearchCriteria;
+import ru.mirea.database.service.util.HousingSpecificationBuilder;
+import ru.mirea.database.service.util.SearchCriteria;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 @Service
 public class HousingSearchServiceImpl implements HousingSearchService {
@@ -30,7 +27,10 @@ public class HousingSearchServiceImpl implements HousingSearchService {
     }
 
     @Override
-    public Page<Housing> search(HousingSearchDTO housingSearchDTO, Pageable pageable) {
+    public Page<Housing> search(HousingSearchDTO housingSearchDTO, Pageable pageable) {     // TODO: 04.11.2023 add null check
+        if (housingSearchDTO == null) {
+            return repository.findAll(pageable);
+        }
         List<SearchCriteria> criteriaList = housingSearchDTO.getSearchCriteriaList();
         if (!criteriaList.isEmpty()) {
             criteriaList.forEach(specificationBuilder::with);
@@ -44,7 +44,7 @@ public class HousingSearchServiceImpl implements HousingSearchService {
         if (!criteriaList.isEmpty()) {
             criteriaList.forEach(specificationBuilder::with);
         }
-        return repository.findAllByCountry(specificationBuilder.build().and(fromCountry(countryName)), pageable);
+        return repository.findAll(specificationBuilder.build().and(fromCountry(countryName)), pageable);
     }
 
     private static Specification<Housing> fromCity(String countryName) {

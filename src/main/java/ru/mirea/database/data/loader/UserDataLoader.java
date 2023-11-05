@@ -1,4 +1,4 @@
-package ru.mirea.database.data;
+package ru.mirea.database.data.loader;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;

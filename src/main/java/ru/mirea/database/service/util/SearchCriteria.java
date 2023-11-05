@@ -1,5 +1,6 @@
-package ru.mirea.database.util;
+package ru.mirea.database.service.util;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

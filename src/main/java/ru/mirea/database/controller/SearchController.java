@@ -1,5 +1,6 @@
 package ru.mirea.database.controller;
 
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,22 +23,26 @@ public class SearchController {
         this.housingSearchService = housingSearchService;
     }
 
-    @PostMapping("housing/{PAGE_NUM}/{PAGE_SIZE}")
-    public ResponseEntity<List<Housing>> searchHousing(@PathVariable("PAGE_NUM") int pageNumber,
-                                                       @PathVariable("PAGE_SIZE") int pageSize,
-                                                       @RequestBody HousingSearchDTO housingSearchDTO) {
+
+    @PostMapping("housing")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Housing> searchHousing(@RequestParam(name = "num", required = false, defaultValue = "0") int pageNumber,
+                                          @RequestParam(name = "size", required = false, defaultValue = "10") int pageSize,
+                                          @RequestBody(required = false) HousingSearchDTO housingSearchDTO) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Housing> page = housingSearchService.search(housingSearchDTO, pageable);
-        return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
+        return page.getContent();
     }
 
-    @PostMapping("housing/by_country/{COUNTRY_NAME}/{PAGE_NUM}/{PAGE_SIZE}")
-    public ResponseEntity<List<Housing>> searchHousingByCountry(@PathVariable("COUNTRY_NAME") String countryName,
-                                                                @PathVariable("PAGE_NUM") int pageNumber,
-                                                                @PathVariable("PAGE_SIZE") int pageSize,
-                                                                @RequestBody HousingSearchDTO housingSearchDTO) {
+
+    @PostMapping("housing/country/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Housing> searchHousingByCountry(@PathVariable("name") String countryName,
+                                                @RequestParam(name = "num", required = false, defaultValue = "0") int pageNumber,
+                                                @RequestParam(name = "size", required = false, defaultValue = "10") int pageSize,
+                                                @RequestBody HousingSearchDTO housingSearchDTO) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Housing> page = housingSearchService.searchByCountry(countryName, housingSearchDTO, pageable);
-        return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
+        return page.getContent();
     }
 }
