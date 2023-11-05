@@ -9,7 +9,7 @@ import ru.mirea.database.data.dto.HousingSearchDTO;
 import ru.mirea.database.data.entity.housing.Housing;
 import ru.mirea.database.data.repository.housing.JpaHousingRepository;
 import ru.mirea.database.service.HousingSearchService;
-import ru.mirea.database.service.util.HousingSpecificationBuilder;
+import ru.mirea.database.service.util.CustomSpecificationBuilder;
 import ru.mirea.database.service.util.SearchCriteria;
 
 import java.util.List;
@@ -19,10 +19,10 @@ public class HousingSearchServiceImpl implements HousingSearchService {
 
     private final JpaHousingRepository repository;
 
-    private final HousingSpecificationBuilder specificationBuilder;
+    private final CustomSpecificationBuilder<Housing> specificationBuilder;
 
     @Autowired
-    public HousingSearchServiceImpl(JpaHousingRepository repository, HousingSpecificationBuilder specificationBuilder) {
+    public HousingSearchServiceImpl(JpaHousingRepository repository, CustomSpecificationBuilder<Housing> specificationBuilder) {
         this.repository = repository;
         this.specificationBuilder = specificationBuilder;
     }
@@ -36,7 +36,7 @@ public class HousingSearchServiceImpl implements HousingSearchService {
         if (!criteriaList.isEmpty()) {
             criteriaList.forEach(specificationBuilder::with);
         }
-        return repository.findAll(specificationBuilder.build(), pageable);
+        return repository.findAll(/*specificationBuilder.build(), */pageable);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class HousingSearchServiceImpl implements HousingSearchService {
         if (!criteriaList.isEmpty()) {
             criteriaList.forEach(specificationBuilder::with);
         }
-        return repository.findAll(specificationBuilder.build().and(fromCountry(countryName)), pageable);
+        return repository.findAll(/*specificationBuilder.build().and(fromCountry(countryName)), */pageable);
     }
 
     private static Specification<Housing> fromCity(String countryName) {
