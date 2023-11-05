@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.mirea.database.data.dto.HousingSearchDTO;
 import ru.mirea.database.data.entity.housing.Housing;
-import ru.mirea.database.data.repository.housing.HousingRepository;
+import ru.mirea.database.data.repository.housing.JpaHousingRepository;
 import ru.mirea.database.service.HousingSearchService;
 import ru.mirea.database.service.util.HousingSpecificationBuilder;
 import ru.mirea.database.service.util.SearchCriteria;
@@ -17,11 +17,12 @@ import java.util.List;
 @Service
 public class HousingSearchServiceImpl implements HousingSearchService {
 
-    private final HousingRepository repository;
+    private final JpaHousingRepository repository;
+
     private final HousingSpecificationBuilder specificationBuilder;
 
     @Autowired
-    public HousingSearchServiceImpl(HousingRepository repository, HousingSpecificationBuilder specificationBuilder) {
+    public HousingSearchServiceImpl(JpaHousingRepository repository, HousingSpecificationBuilder specificationBuilder) {
         this.repository = repository;
         this.specificationBuilder = specificationBuilder;
     }
