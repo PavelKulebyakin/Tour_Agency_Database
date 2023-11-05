@@ -1,18 +1,22 @@
-package ru.mirea.database.data.repository.housing;
+package ru.mirea.database.data.repository.housing.castom;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
+
 import ru.mirea.database.data.dto.HousingDTO;
 import ru.mirea.database.data.entity.housing.Housing;
+import ru.mirea.database.data.repository.housing.CustomSearchRepository;
 
 @Repository
 public class CustomSearchRepositoryImpl implements CustomSearchRepository {
