@@ -20,15 +20,15 @@ public class CustomSpecification<T> implements Specification<T> {
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 
         SearchOperation operation = SearchOperation.valueOf(criteria.getOperation().toUpperCase());
-
         Path<T> path = root.get(criteria.getFilterKey());
+        Object value = criteria.getValue();
 
-        switch (operation) {
-            case EQUAL -> builder.equal(root.get(criteria.getFilterKey()), criteria.getValue());
-            case NOT_EQUAL -> builder.notEqual(root.get(criteria.getFilterKey()), criteria.getValue());
-        }
+        return switch (operation) {
+            case EQUAL -> builder.equal(path, value);
+            case NOT_EQUAL -> builder.notEqual(path, value);
+            default -> builder.conjunction();
+        };
 
-        return builder.conjunction();       //TODO
     }
 
 }

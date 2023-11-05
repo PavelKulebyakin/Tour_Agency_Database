@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -30,6 +31,11 @@ public class CustomSpecificationBuilder<T> {
         return this;
     }
 
+    public final CustomSpecificationBuilder<T> with(Collection<? extends SearchCriteria> searchCriteriaList) {
+        criteria.addAll(searchCriteriaList);
+        return this;
+    }
+
     public Specification<T> build() {
 
         if (criteria.isEmpty())
@@ -42,7 +48,7 @@ public class CustomSpecificationBuilder<T> {
                     Specification.where(result).or(new CustomSpecification<>(criteria)) :
                     Specification.where(result).and(new CustomSpecification<>(criteria));
         }
-
+        criteria.clear();
         return result;
     }
 
