@@ -19,10 +19,10 @@ public class HousingSearchServiceImpl implements HousingSearchService {
 
     private final JpaHousingRepository repository;
 
-    private final HousingSpecificationBuilder specificationBuilder;
+    private final CustomSpecificationBuilder<Housing> specificationBuilder;
 
     @Autowired
-    public HousingSearchServiceImpl(JpaHousingRepository repository, HousingSpecificationBuilder specificationBuilder) {
+    public HousingSearchServiceImpl(JpaHousingRepository repository, CustomSpecificationBuilder<Housing> specificationBuilder) {
         this.repository = repository;
         this.specificationBuilder = specificationBuilder;
     }
