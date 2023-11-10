@@ -14,7 +14,7 @@ public class SearchCriteria {
     private String filterKey;
     @JsonProperty("operation")
     private String operation;
-    @JsonProperty("value")// CustomSpecification.SearchOperation
+    @JsonProperty("value")//
     private Object value;
     @JsonProperty("or")
     private boolean orPredicate;

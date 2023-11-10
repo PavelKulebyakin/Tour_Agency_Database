@@ -48,6 +48,7 @@ public class CustomSpecificationBuilder<T> {
                     Specification.where(result).or(new CustomSpecification<>(criteria)) :
                     Specification.where(result).and(new CustomSpecification<>(criteria));
         }
+
         criteria.clear();
         return result;
     }
