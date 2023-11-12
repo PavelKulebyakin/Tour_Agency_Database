@@ -15,6 +15,7 @@ import java.sql.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Review {
 
+                                                                // TODO: 12.11.2023 add composite primary key (id)
     @NotNull
     @ManyToOne
     private Client client;
@@ -24,12 +25,11 @@ public class Review {
     private Tour tour;*/
 
     @NotNull
-    @ManyToOne
     private int rating;
 
     @NotBlank
     @Size(max = 500)
-    private String text;
+    private String text;                                        // TODO: 12.11.2023 check SLOB
 
     @NotNull
     private Date date;

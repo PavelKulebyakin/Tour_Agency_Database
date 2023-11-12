@@ -16,7 +16,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BookingStatus {
 
-    @Id
+    @Id                                                             // TODO: 12.11.2023 check private setter
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
@@ -27,4 +27,5 @@ public class BookingStatus {
     public BookingStatus(String name) {
         this.name = name;
     }
+
 }
