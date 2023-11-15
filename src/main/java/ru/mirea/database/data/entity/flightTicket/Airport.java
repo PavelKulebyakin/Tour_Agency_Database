@@ -27,7 +27,7 @@ public class Airport {
     private String identificator;
 
     @NotBlank
-    @Size(max = 18)
+    @Size(max = 100)
     private String addres;
 
     public Airport(String name, String identificator, String addres) {

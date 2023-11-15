@@ -10,10 +10,12 @@ import java.sql.Date;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
+// TODO: 12.11.2023 add relationship
+
 @Data
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-@Table(name = "flightTicket")
+@Table(name = "flight_ticket")
 public class FlightTicket {
 
     @Id
@@ -26,11 +28,11 @@ public class FlightTicket {
     private int flightNumber;
 
     @NotNull
-    @Column(name = "departure_date")
+    @Column(name = "departure_time")
     private Date departureDate;
 
     @NotNull
-    @Column(name = "arrival_date")
+    @Column(name = "arrival_time")
     private Date arrivalDate;
 
     @NotNull
