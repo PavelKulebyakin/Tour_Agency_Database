@@ -1,4 +1,4 @@
-package ru.mirea.database.data.entity.location;
+package ru.mirea.database.data.entity.housing;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.mirea.database.data.entity.location.Country;
 
 import java.util.Set;
 
