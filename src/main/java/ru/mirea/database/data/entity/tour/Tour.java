@@ -6,11 +6,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.mirea.database.data.entity.housing.Housing;
+import lombok.Setter;
+import ru.mirea.database.data.entity.property.Property;
+import ru.mirea.database.data.entity.tickets.Ticket;
 
 import java.sql.Date;
+import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Data
@@ -22,38 +26,46 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id")
-    private Long id;
+    @Setter(value = PRIVATE)
+    protected Long id;
 
     @NotBlank
     @Size(max = 20)
     @Column(name = "name")
-    private String name;
+    protected String name;
 
     @NotNull
     @Column(name = "price")
-    private int price;
+    protected int price;
 
     @NotNull
     @Column(name = "start_date")
-    private Date startDate;
+    protected Date startDate;
 
     @NotNull
     @Column(name = "end_date")
-    private Date endDate;
+    protected Date endDate;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "tour_type_id")
-    private TourType tourType;
+    protected TourType tourType;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "housing_id")
-    private Housing housing;
+    @JoinColumn(name = "property_id")
+    protected Property property;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "tour_company_id")
-    private TourCompany tourCompany;
+    protected TourCompany tourCompany;
+    
+    @NotNull
+    @ManyToMany
+    @JoinTable(name = "tour_ticket",
+            joinColumns = @JoinColumn(name = "tour_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "ticket_id", referencedColumnName = "id"))
+    protected Set<Ticket> tickets;
 
 }

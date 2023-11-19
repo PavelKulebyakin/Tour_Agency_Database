@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -19,24 +20,25 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @Setter(value = AccessLevel.PRIVATE)
+    protected Long id;
 
     @NotBlank
     @Size(max = 20)
-    private String firstname;
+    protected String firstname;
 
     @NotBlank
     @Size(max = 20)
-    private String lastname;
+    protected String lastname;
 
     @NotBlank
     @Size(max = 20)
-    private String phoneNumber;
+    protected String phoneNumber;
 
     @NotBlank
     @Email
     @Size(max = 30)
-    private String email;
+    protected String email;
 
     public Client(String firstname, String lastname, String phoneNumber, String email) {
         this.firstname = firstname;

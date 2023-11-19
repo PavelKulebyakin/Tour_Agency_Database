@@ -7,38 +7,41 @@ import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class Review {
 
-                                                                // TODO: 12.11.2023 add composite primary key (id)
-    @NotNull
-    @ManyToOne
-    private Client client;
-
-    /*@NotNull
-    @ManyToOne
-    private Tour tour;*/
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(value = AccessLevel.PRIVATE)
+    protected Long id;
 
     @NotNull
-    private int rating;
+    @OneToOne
+    protected Booking booking;
+
+    @NotNull
+    protected int rating;
 
     @NotBlank
     @Size(max = 500)
-    private String text;                                        // TODO: 12.11.2023 check SLOB
+    protected String text;
 
     @NotNull
-    private Date date;
+    @CreatedDate
+    protected LocalDate date;
 
-    public Review(Client client, /*Tour tour,*/ int rating, String text, Date date) {
-        this.client = client;
-        //this.tour = tour;
+    public Review(Booking booking, int rating, String text) {
+        this.booking = booking;
         this.rating = rating;
         this.text = text;
-        this.date = date;
     }
 }

@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -16,13 +17,14 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BookingStatus {
 
-    @Id                                                             // TODO: 12.11.2023 check private setter
+    @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @Setter(value = AccessLevel.PRIVATE)
+    protected Long id;
 
     @NotBlank
     @Size(max = 20)
-    private String name;
+    protected String name;
 
     public BookingStatus(String name) {
         this.name = name;

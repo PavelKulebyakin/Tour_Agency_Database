@@ -8,8 +8,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Data
@@ -19,19 +21,20 @@ public class TourCompany {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @Setter(value = PRIVATE)
+    protected Long id;
 
     @NotBlank
     @Size(max = 20)
-    private String name;
+    protected String name;
 
     @NotBlank
     @Size(max = 20)
-    private String phoneNumber;
+    protected String phoneNumber;
 
     @Email
     @Size(max = 100)
-    private String email;
+    protected String email;
 
     public TourCompany(String name, String phoneNumber, String email) {
         this.name = name;
