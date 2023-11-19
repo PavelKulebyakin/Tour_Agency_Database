@@ -5,11 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Data
@@ -20,22 +22,23 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @Setter(value = PRIVATE)
+    protected Long id;
 
     @NotBlank
-    private String username;
+    protected String username;
     @NotBlank
-    private String password;
+    protected String password;
 //    @NotBlank
-    private String firstname;
+    protected String firstname;
 //    @NotBlank
-    private String lastname;
+    protected String lastname;
 
     @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> role = new HashSet<>();
+    protected Set<Role> role = new HashSet<>();
 
     public void addRole(Role newRole) {
         this.role.add(newRole);

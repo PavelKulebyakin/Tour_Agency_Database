@@ -1,31 +1,30 @@
 package ru.mirea.database.data.entity.user;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)                          // TODO: 19.11.2023 check 
 public class Role {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @Setter(value = AccessLevel.PRIVATE)
+    protected Long id;
 
-    private String name;
+    protected String name;
 
-//    @Setter(value = AccessLevel.PRIVATE)
+//    @Setter(value = AccessLevel.PROTECTED)
 //    @ManyToMany(mappedBy = "role")
-//    private Set<UserEntity> user = new HashSet<>();
+//    protected Set<UserEntity> user = new HashSet<>();
 
     public Role(String name) {
         this.name = name;

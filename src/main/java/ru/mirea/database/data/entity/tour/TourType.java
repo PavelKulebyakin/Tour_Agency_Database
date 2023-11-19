@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -18,11 +19,12 @@ public class TourType {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @Setter(value = AccessLevel.PRIVATE)
+    protected Long id;
 
     @NotBlank
     @Size(max = 20)
-    private String typeName;
+    protected String typeName;
 
     public TourType(String typeName) {
         this.typeName = typeName;

@@ -2,11 +2,14 @@ package ru.mirea.database.data.entity.booking;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import ru.mirea.database.data.entity.tour.Tour;
 
-import java.sql.Date;                                   // TODO: 12.11.2023 check Date package
+import java.time.LocalDate;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -16,24 +19,30 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @Table(name = "booking")
 public class Booking {
-                                                        // TODO: 12.11.2023 add composite primary key (id)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(value = AccessLevel.PRIVATE)
+    protected Long id;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Client client;
+    protected Client client;
 
-    /*@NotNull
-    @ManyToOne
+    @NotNull
+    @OneToOne
     @JoinColumn(name = "tour_id")
-    private Tour tour;*/
+    protected Tour tour;
 
     @NotNull
     @OneToOne
     @JoinColumn(name = "booking_status_id")
-    private BookingStatus booingStatus;
+    protected BookingStatus booingStatus;
 
     @NotNull
-    @Setter(value = PROTECTED)                          // TODO: 12.11.2023 add immutable
-    private Date bookingDate;                           // TODO: 12.11.2023 add generator
+    @CreatedDate
+    @Column(name = "date")
+    protected LocalDate bookingDate;
 
 }
