@@ -19,7 +19,7 @@ import ru.mirea.database.data.entity.housing.Housing;
 import ru.mirea.database.data.repository.housing.CustomSearchRepository;
 
 @Repository
-public class CustomSearchRepositoryImpl implements CustomSearchRepository {
+public class CustomSearchRepositoryImpl implements CustomSearchRepository {                 // TODO: 12.11.2023 change name
 
     @PersistenceContext
     private EntityManager entityManager;
