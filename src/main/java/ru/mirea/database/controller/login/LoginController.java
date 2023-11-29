@@ -19,7 +19,7 @@ public class LoginController {
         this.authenticationService = authenticationService;
     }
 
-    @GetMapping("/singin")
+    @GetMapping("/login")
     public String loginPage(Model model) {
         model.addAttribute("singinDTO", new SinginDTO());
         return "singin";
