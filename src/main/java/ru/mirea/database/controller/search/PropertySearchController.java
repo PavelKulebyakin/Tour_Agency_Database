@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.mirea.database.data.dto.property.PropertyDTO;
-import ru.mirea.database.data.dto.property.PropertySearchCriteriaDTO;
+import ru.mirea.database.data.dto.search.SearchCriteriaDTO;
 import ru.mirea.database.service.data.property.PropertyService;
 import ru.mirea.database.service.search.PropertySearchService;
 
@@ -27,7 +27,7 @@ public class PropertySearchController {
     @ResponseStatus(HttpStatus.OK)
     public List<PropertyDTO> searchPropertyWithCriteria(@RequestParam(name = "num", required = false, defaultValue = "0") int pageNumber,
                                                         @RequestParam(name = "size", required = false, defaultValue = "10") int pageSize,
-                                                        @RequestBody PropertySearchCriteriaDTO propertySearchCriteria) {
+                                                        @RequestBody SearchCriteriaDTO propertySearchCriteria) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<PropertyDTO> page = searchService.search(propertySearchCriteria, pageable);
         return page.getContent();

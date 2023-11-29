@@ -1,4 +1,4 @@
-package ru.mirea.database.controller.admin;
+package ru.mirea.database.controller.rest;
 
 import java.util.Optional;
 
@@ -13,11 +13,11 @@ import java.util.NoSuchElementException;
 import java.util.List;
 
 @RestController
-public class ClientController {                                                 // TODO: 19.11.2023 check all methods
+public class RestClientController {                                                 // TODO: 19.11.2023 check all methods
 
     protected final ClientService clientService;
 
-    public ClientController(ClientService clientService) {
+    public RestClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 

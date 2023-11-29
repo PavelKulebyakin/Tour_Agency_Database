@@ -19,6 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+    private final String[] PUBLIC_URL = {"/", "/home", "/static/css/**", "/static/images/**"};
+    private final String LOGIN_URL = "/login";
+
     protected final UserDetailsService userDetailsService;
 
     @Autowired
@@ -43,20 +46,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home", "/css/**", "/public/**", "/api/auth/**").permitAll()
+                        .requestMatchers(PUBLIC_URL).permitAll()
                         .anyRequest().authenticated()
-//                        .requestMatchers(HttpMethod.GET).hasRole("USER")
-//                        .requestMatchers(HttpMethod.POST).hasRole("USER")
-//                        .requestMatchers(HttpMethod.PATCH).hasRole("ADMIN")
-//                        .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 )
                 .formLogin((form) -> form
-                        .loginPage("/api/auth/login")
+                        .loginPage(LOGIN_URL)
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll)
+//                .rememberMe((remeber) -> remeber
+//                        .key("AbcdefghiJklmNoPqRstUvXyz")   // cookies will survive if restarted
+//                        .tokenValiditySeconds(86400))
                 .csrf(AbstractHttpConfigurer::disable);         // TODO: 25.10.2023 add CSRF token
-
         return http.build();
     }
 

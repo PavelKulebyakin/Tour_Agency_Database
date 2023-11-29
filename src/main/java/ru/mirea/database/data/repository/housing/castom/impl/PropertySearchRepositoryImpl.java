@@ -29,10 +29,10 @@ public class PropertySearchRepositoryImpl implements PropertySearchRepository {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<PropertyDTO> criteriaQuery = criteriaBuilder.createQuery(PropertyDTO.class);
-        Root<Property> housingRoot = criteriaQuery.from(Property.class);
+        Root<Property> housing = criteriaQuery.from(Property.class);
 
-        criteriaQuery.select(criteriaBuilder.construct(PropertyDTO.class, housingRoot.get("name"), housingRoot.get("addres")))
-                .where(specification.toPredicate(housingRoot, criteriaQuery, criteriaBuilder));
+        criteriaQuery.select(criteriaBuilder.construct(PropertyDTO.class, housing.get("name"), housing.get("addres")))
+                .where(specification.toPredicate(housing, criteriaQuery, criteriaBuilder));
 
         TypedQuery<PropertyDTO> pageableQuery = entityManager.createQuery(criteriaQuery)
                 .setFirstResult((int) pageable.getOffset()).setMaxResults(pageable.getPageSize());

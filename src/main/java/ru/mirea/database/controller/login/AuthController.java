@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.mirea.database.data.dto.user.RegisterDTO;
-import ru.mirea.database.data.dto.user.LoginDTO;
+import ru.mirea.database.data.dto.user.SinginDTO;
 import ru.mirea.database.service.auth.AuthenticationService;
 
 @RestController
@@ -19,14 +19,9 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
 
-    @GetMapping("login")
-    public String loginPage(){
-        return "This is login page";
-    }
-
     @PostMapping("login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO){
-        authenticationService.loginUser(loginDTO);
+    public ResponseEntity<String> login(@RequestBody SinginDTO singinDTO){
+        authenticationService.loginUser(singinDTO);
         return new ResponseEntity<>("User signed successfully.", HttpStatus.OK);
     }
 

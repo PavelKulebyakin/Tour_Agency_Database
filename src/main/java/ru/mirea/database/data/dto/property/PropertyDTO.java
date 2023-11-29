@@ -11,5 +11,8 @@ public class PropertyDTO {
 
     protected String name;
     protected String addres;
+    protected int numberOfRooms;
+    protected int Capacity;
+
 
 }

@@ -34,7 +34,8 @@ public class UserEntity {
 //    @NotBlank
     protected String lastname;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+    // TODO: 22.11.2023 what the fuck? hate this shit
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))

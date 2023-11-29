@@ -1,4 +1,4 @@
-package ru.mirea.database.data.dto.property;
+package ru.mirea.database.data.dto.search;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PropertySearchCriteriaDTO {
+public class SearchCriteriaDTO {
 
     @JsonProperty("search_criteria")
     protected List<SearchCriteria> searchCriteriaList;
