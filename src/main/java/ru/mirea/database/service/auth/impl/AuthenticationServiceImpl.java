@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.mirea.database.data.dto.user.SinginDTO;
+import ru.mirea.database.data.dto.user.LoginDTO;
 import ru.mirea.database.data.dto.user.RegisterDTO;
 import ru.mirea.database.data.entity.user.Role;
 import ru.mirea.database.data.entity.user.UserEntity;
@@ -35,9 +35,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public void loginUser(SinginDTO singinDTO) {
+    public void loginUser(LoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(singinDTO.getUsername(), singinDTO.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 

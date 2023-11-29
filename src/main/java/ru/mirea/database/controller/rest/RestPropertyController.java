@@ -23,7 +23,7 @@ public class RestPropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping("housing")
+    @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<PropertyDTO> getProperties(@RequestParam(name = "num", required = false, defaultValue = "0") int pageNumber,
                                            @RequestParam(name = "size", required = false, defaultValue = "10") int pageSize) {

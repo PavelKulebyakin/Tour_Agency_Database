@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.mirea.database.data.dto.user.SinginDTO;
+import ru.mirea.database.data.dto.user.LoginDTO;
 import ru.mirea.database.service.auth.AuthenticationService;
 
 @Controller
@@ -21,13 +21,13 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage(Model model) {
-        model.addAttribute("singinDTO", new SinginDTO());
-        return "singin";
+        model.addAttribute("loginDTO", new LoginDTO());
+        return "login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute SinginDTO singinDTO){
-        authenticationService.loginUser(singinDTO);
+    public String login(@ModelAttribute LoginDTO loginDTO){
+        authenticationService.loginUser(loginDTO);
         return "redirect:/search";
     }
 

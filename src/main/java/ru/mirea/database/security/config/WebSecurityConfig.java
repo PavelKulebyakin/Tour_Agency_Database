@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final String[] PUBLIC_URL = {"/", "/home", "/static/css/**", "/static/images/**"};
+    private final String[] PUBLIC_URL = {"/", "/home", "/static/css/**", "/search**"};
     private final String LOGIN_URL = "/login";
 
     protected final UserDetailsService userDetailsService;

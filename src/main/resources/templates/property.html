@@ -12,7 +12,7 @@
 
 <h1 class="py-5">Property Controller</h1>
 
-<form method="post" th:action="@{/property/}" th:object="${propertyDTO}" class="col card p-3 mb-5"> <!--todo add-->
+<form method="post" th:action="@{/property}" th:object="${newProperty}" class="col card p-3 mb-5"> <!--todo add-->
     <div class="form-group">
         <label for="name">Name</label>
         <input id="name" placeholder="Property Name" required type="text" th:field="*{name}"
@@ -33,37 +33,78 @@
         <input id="capacity" placeholder="Capacity" required type="number" th:field="*{capacity}"
                class="form-control"/>
     </div>
-<!--    <div class="form-group">-->
-<!--        <label for="typeOfFood">Role</label>-->
-<!--        <select id="typeOfFood" required th:field="*{typeOfFood}" class="form-control ">-->
-<!--            <option value="" hidden>Select a type of food</option>-->
-<!--            <option th:each="role : ${}"-->
-<!--                    th:value="${typeOfFood}"-->
-<!--                    th:text="${typeOfFood}">-->
-<!--            </option>-->
-<!--        </select>-->
-<!--    </div>-->
-    <input type="submit" class="btn btn-primary" value="Create User">
+    <div class="form-group">
+        <label for="City">City</label>
+        <select id="City" required  th:field="*{city}" class="form-control ">
+            <option value="" hidden>Select city</option>
+            <option th:each="c : ${cities}"
+                    th:value="${c.id}"
+                    th:text="${c.name}">
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="typeOfFood">Type of food</label>
+        <select id="typeOfFood" required  th:field="*{typeOfFood}" class="form-control ">
+            <option value="" hidden>Select type of food</option>
+            <option th:each="p : ${typesOfFood}"
+                    th:value="${p.id}"
+                    th:text="${p.name}">
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="owner">Owner</label>
+        <select id="owner" required  th:field="*{owner}" class="form-control ">
+            <option value="" hidden>Select owner</option>
+            <option th:each="o : ${owners}"
+                    th:value="${o.id}"
+                    th:text="${o.name}">
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="propertyType">Property type</label>
+        <select id="propertyType" required  th:field="*{propertyType}" class="form-control ">
+            <option value="" hidden>Select property type</option>
+            <option th:each="pt : ${propertyTypes}"
+                    th:value="${pt.id}"
+                    th:text="${pt.name}">
+            </option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Add Property">
 </form>
 
-<!--<table class="table table-striped table-bordered">-->
-<!--    <tr>-->
-<!--        <th>ID</th>-->
-<!--        <th>First Name</th>-->
-<!--        <th>Last Name</th>-->
-<!--        <th>Role</th>-->
-<!--        <th>Created At</th>-->
-<!--    </tr>-->
-<!--    <tr th:if="${#lists.isEmpty(users)}">-->
-<!--        <td colspan="5">No Records found. Add some...!</td>-->
-<!--    </tr>-->
-<!--    <tr th:each="user : ${users}">-->
-<!--        <td th:text="${user.id}"></td>-->
-<!--        <td th:text="${user.firstName}"></td>-->
-<!--        <td th:text="${user.lastName}"></td>-->
-<!--        <td th:text="${user.role}"></td>-->
-<!--        <td th:text="${user.createdAt}"></td>-->
-<!--    </tr>-->
-<!--</table>-->
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Number of Rooms</th>
+        <th>Capacity</th>
+        <th>City</th>
+        <th>Type of Food</th>
+        <th>Owner</th>
+        <th>Property Type</th>
+        <th>Dlete Propety</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(properties)}">
+        <td>No Records found. Add some...!</td>
+    </tr>
+    <tr th:each="property : ${properties}">
+        <td th:text="${property.name}"></td>
+        <td th:text="${property.address}"></td>
+        <td th:text="${property.numberOfRooms}"></td>
+        <td th:text="${property.capacity}"></td>
+        <td th:text="${property.city.name}"></td>
+        <td th:text="${property.typeOfFood.name}"></td>
+        <td th:text="${property.owner.name}"></td>
+        <td th:text="${property.propertyType.name}"></td>
+        <td></td>
+    </tr>
+</table>
 </body>
 </html>

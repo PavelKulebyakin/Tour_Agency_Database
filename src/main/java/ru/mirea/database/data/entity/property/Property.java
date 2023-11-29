@@ -35,8 +35,8 @@ public class Property {
 
     @NotBlank
     @Size(max = 100)
-    @Column(name = "addres")
-    protected String addres;
+    @Column(name = "address")
+    protected String address;
 
     @NotNull
     @Column(name = "number_of_rooms")
