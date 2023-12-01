@@ -42,7 +42,7 @@ public class ProrertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public Page<PropertyDTO> findAll(Pageable pageable) {
+    public Page<Property> findAll(Pageable pageable) {
         return propertyRepository.findAllBy(pageable);
     }
 

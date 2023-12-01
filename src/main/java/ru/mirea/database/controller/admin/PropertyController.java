@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.mirea.database.data.dto.property.PropertyDTO;
 import ru.mirea.database.data.entity.location.City;
 import ru.mirea.database.data.entity.property.Owner;
+import ru.mirea.database.data.entity.property.Property;
 import ru.mirea.database.data.entity.property.PropertyType;
 import ru.mirea.database.data.entity.property.TypeOfFood;
 import ru.mirea.database.service.data.property.PropertyService;
@@ -33,8 +34,8 @@ public class PropertyController {
     public String property(Model model) {                                               // TODO: 29.11.2023 change later
 
         Pageable pageable = PageRequest.of(0, 10);
-        Page<PropertyDTO> page = propertyService.findAll(pageable);
-        List<PropertyDTO> properties = page.getContent();
+        Page<Property> page = propertyService.findAll(pageable);
+        List<Property> properties = page.getContent();
         model.addAttribute("properties", properties);
 
         List<City> cities = propertyService.getAllCities();
@@ -49,8 +50,7 @@ public class PropertyController {
         List<PropertyType> propertyTypes = propertyService.getAllPropertyTypes();
         model.addAttribute("propertyTypes", propertyTypes);
 
-        model.addAttribute("newProperty",
-                new PropertyDTO(null, null, 0, 0, null, null, null, null));
+        model.addAttribute("newProperty", new PropertyDTO());
         return "property";
     }
 
