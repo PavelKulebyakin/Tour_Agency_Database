@@ -28,7 +28,7 @@ public class City {
     protected String name;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Country country;
 
     public City(String name, Country country) {

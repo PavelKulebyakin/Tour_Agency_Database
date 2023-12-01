@@ -47,26 +47,26 @@ public class Property {
     protected int capacity;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_of_food_id")
     protected TypeOfFood typeOfFood;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     protected City city;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     protected Owner owner;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_type_id")
     protected PropertyType propertyType;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})                          // TODO: 19.11.2023 check cascade type
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})                          // TODO: 19.11.2023 check cascade type
     @JoinTable(name = "property_facilities",
             joinColumns = @JoinColumn(name = "property_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "facilities_id", referencedColumnName = "id"))
