@@ -1,5 +1,7 @@
 package ru.mirea.database.service.data.property.impl;
 
+import org.springframework.stereotype.Service;
+import ru.mirea.database.data.dto.NameIdDTO;
 import ru.mirea.database.data.entity.property.TypeOfFood;
 import ru.mirea.database.data.repository.housing.jpa.JpaTypeOfFoodRepository;
 import ru.mirea.database.service.data.property.TypeOfFoodService;
@@ -7,11 +9,13 @@ import ru.mirea.database.service.data.property.TypeOfFoodService;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.SortedMap;
 
-public class TypeOfFoodServiceImplementation implements TypeOfFoodService {
+@Service
+public class TypeOfFoodServiceImpl implements TypeOfFoodService {
     protected JpaTypeOfFoodRepository typeOfFoodRepository;
 
-    public TypeOfFoodServiceImplementation(JpaTypeOfFoodRepository typeOfFoodRepository) {
+    public TypeOfFoodServiceImpl(JpaTypeOfFoodRepository typeOfFoodRepository) {
         this.typeOfFoodRepository = typeOfFoodRepository;
     }
 
@@ -26,16 +30,17 @@ public class TypeOfFoodServiceImplementation implements TypeOfFoodService {
     }
 
     @Override
-    public Optional<TypeOfFood> getTypeById(Long id) throws NoSuchElementException {
-        Optional<TypeOfFood> typeOfFood = typeOfFoodRepository.findById(id);
-        if(typeOfFood.isPresent()) {
-            return typeOfFood;
-        }
-        throw new NoSuchElementException();
+    public TypeOfFood getTypeById(Long id) throws NoSuchElementException {
+        return typeOfFoodRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     @Override
     public void deleteTypeById(Long id) {
         typeOfFoodRepository.deleteById(id);
+    }
+
+    @Override
+    public SortedMap<String, Long> getNamesMap() {
+        return NameIdDTO.toSortedMap(typeOfFoodRepository.findAllBy());
     }
 }

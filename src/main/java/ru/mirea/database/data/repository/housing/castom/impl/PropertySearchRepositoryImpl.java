@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
-import ru.mirea.database.data.dto.property.PropertyDTO;
+import ru.mirea.database.data.dto.property.PropertyOutputDTO;
 import ru.mirea.database.data.entity.property.Property;
 import ru.mirea.database.data.repository.housing.castom.PropertySearchRepository;
 
@@ -25,16 +25,16 @@ public class PropertySearchRepositoryImpl implements PropertySearchRepository {
     protected EntityManager entityManager;
 
     @Override
-    public Page<PropertyDTO> findNameAndAddressBy(Specification<Property> specification, Pageable pageable) {
+    public Page<PropertyOutputDTO> findNameAndAddressBy(Specification<Property> specification, Pageable pageable) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<PropertyDTO> criteriaQuery = criteriaBuilder.createQuery(PropertyDTO.class);
+        CriteriaQuery<PropertyOutputDTO> criteriaQuery = criteriaBuilder.createQuery(PropertyOutputDTO.class);
         Root<Property> housing = criteriaQuery.from(Property.class);
 
-        criteriaQuery.select(criteriaBuilder.construct(PropertyDTO.class, housing.get("name"), housing.get("address")))
+        criteriaQuery.select(criteriaBuilder.construct(PropertyOutputDTO.class, housing.get("name"), housing.get("address")))
                 .where(specification.toPredicate(housing, criteriaQuery, criteriaBuilder));
 
-        TypedQuery<PropertyDTO> pageableQuery = entityManager.createQuery(criteriaQuery)
+        TypedQuery<PropertyOutputDTO> pageableQuery = entityManager.createQuery(criteriaQuery)
                 .setFirstResult((int) pageable.getOffset()).setMaxResults(pageable.getPageSize());
 
         return new PageImpl<>(pageableQuery.getResultList());

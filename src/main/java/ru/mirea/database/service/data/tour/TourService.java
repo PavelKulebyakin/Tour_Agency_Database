@@ -14,4 +14,6 @@ public interface TourService {
     Optional<Tour> getTourById(Long id) throws NoSuchElementException;
 
     void deleteTourById(Long id);
+
+    Boolean referencesPropertyById(Long id);
 }

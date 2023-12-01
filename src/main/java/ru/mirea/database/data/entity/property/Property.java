@@ -70,6 +70,16 @@ public class Property {
     @JoinTable(name = "property_facilities",
             joinColumns = @JoinColumn(name = "property_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "facilities_id", referencedColumnName = "id"))
-    protected Set<Facilities> amenities = new HashSet<>();
+    protected Set<Facilities> facilities = new HashSet<>();
 
+    public Property(String name, String address, int numberOfRooms, int capacity, TypeOfFood typeOfFood, City city, Owner owner, PropertyType propertyType) {
+        this.name = name;
+        this.address = address;
+        this.numberOfRooms = numberOfRooms;
+        this.capacity = capacity;
+        this.typeOfFood = typeOfFood;
+        this.city = city;
+        this.owner = owner;
+        this.propertyType = propertyType;
+    }
 }

@@ -1,5 +1,6 @@
 package ru.mirea.database.service.data.tour.impl;
 
+import org.springframework.stereotype.Service;
 import ru.mirea.database.data.entity.tour.Tour;
 import ru.mirea.database.data.repository.tour.JpaTourRepository;
 import ru.mirea.database.service.data.tour.TourService;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Service
 public class TourServiceImplementation implements TourService {
     protected JpaTourRepository tourRepository;
 
@@ -37,5 +39,10 @@ public class TourServiceImplementation implements TourService {
     @Override
     public void deleteTourById(Long id) {
         tourRepository.deleteById(id);
+    }
+
+    @Override
+    public Boolean referencesPropertyById(Long id) {
+        return tourRepository.existsByProperty_Id(id);
     }
 }

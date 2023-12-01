@@ -1,5 +1,6 @@
 package ru.mirea.database.service.data.location.impl;
 
+import org.springframework.stereotype.Service;
 import ru.mirea.database.data.entity.location.Country;
 import ru.mirea.database.data.repository.location.JpaCountryRepository;
 import ru.mirea.database.service.data.location.CountryService;
@@ -8,10 +9,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-public class CountryServiceImplementation implements CountryService {
+@Service
+public class CountryServiceImpl implements CountryService {
     protected JpaCountryRepository countryRepository;
 
-    public CountryServiceImplementation(JpaCountryRepository countryRepository) {
+    public CountryServiceImpl(JpaCountryRepository countryRepository) {
         this.countryRepository = countryRepository;
     }
 

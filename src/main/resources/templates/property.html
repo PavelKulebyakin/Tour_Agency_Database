@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +12,7 @@
 
 <h2 class="py-5 text-center">Property Controller</h2>
 
-<form method="post" th:action="@{/property}" th:object="${newProperty}" class="col mb-5"> <!--todo add-->
+<form method="post" th:action="@{/property/add}" th:object="${input}" class="col mb-5"> <!--todo add-->
 
     <div class="form-group">
         <label for="name">Имя</label>
@@ -41,11 +41,11 @@
         </div>
         <div class="form-group col-md align-items-start flex-column">
             <label for="City">Город</label>
-            <select id="City" required  th:field="*{city}" class="form-control ">
+            <select id="City" required  th:field="*{cityId}" class="form-control ">
                 <option value="" hidden>Select city</option>
                 <option th:each="c : ${cities}"
-                        th:value="${c.id}"
-                        th:text="${c.name}">
+                        th:value="${c.value}"
+                        th:text="${c.key}">
                 </option>
             </select>
         </div>
@@ -54,22 +54,22 @@
     <div class="row">
         <div class="form-group col-md align-items-start flex-column">
             <label for="typeOfFood">Тип питания</label>
-            <select id="typeOfFood" required  th:field="*{typeOfFood}" class="form-control ">
+            <select id="typeOfFood" required  th:field="*{typeOfFoodId}" class="form-control ">
                 <option value="" hidden>Select type of food</option>
                 <option th:each="p : ${typesOfFood}"
-                        th:value="${p.id}"
-                        th:text="${p.name}">
+                        th:value="${p.value}"
+                        th:text="${p.key}">
                 </option>
             </select>
         </div>
 
         <div class="form-group col-md align-items-start flex-column">
             <label for="propertyType">Тип жилья</label>
-            <select id="propertyType" required  th:field="*{propertyType}" class="form-control ">
+            <select id="propertyType" required  th:field="*{propertyTypeId}" class="form-control ">
                 <option value="" hidden>Select property type</option>
                 <option th:each="pt : ${propertyTypes}"
-                        th:value="${pt.id}"
-                        th:text="${pt.name}">
+                        th:value="${pt.value}"
+                        th:text="${pt.key}">
                 </option>
             </select>
         </div>
@@ -77,11 +77,11 @@
 
     <div class="form-group">
         <label for="owner">Владелец</label>
-        <select id="owner" required  th:field="*{owner}" class="form-control ">
+        <select id="owner" required  th:field="*{ownerId}" class="form-control ">
             <option value="" hidden>Select owner</option>
             <option th:each="o : ${owners}"
-                    th:value="${o.id}"
-                    th:text="${o.name}">
+                    th:value="${o.value}"
+                    th:text="${o.key}">
             </option>
         </select>
     </div>
@@ -90,7 +90,7 @@
 
 </form>
 
-<table class="table table-hover">
+<table class="table table-hover mb-2">
     <tr>
         <th>Имя</th>
         <th>Адрес</th>
@@ -110,11 +110,15 @@
         <td th:text="${property.address}"></td>
         <td th:text="${property.numberOfRooms}"></td>
         <td th:text="${property.capacity}"></td>
-        <td th:text="${property.city.name}"></td>
-        <td th:text="${property.typeOfFood.name}"></td>
-        <td th:text="${property.owner.name}"></td>
-        <td th:text="${property.propertyType.name}"></td>
-        <td><button th:if="${#lists.size(properties) > 0}" type="button" class="btn btn-outline-danger">Delete</button></td>
+        <td th:text="${property.city}"></td>
+        <td th:text="${property.typeOfFood}"></td>
+        <td th:text="${property.owner}"></td>
+        <td th:text="${property.propertyType}"></td>
+        <td>
+            <form th:if="${#lists.size(properties) > 0}" th:action="@{/property/delete/{id}(id=${property.id})}" method="post">
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
+            </form>
+        </td>
     </tr>
 </table>
 </body>

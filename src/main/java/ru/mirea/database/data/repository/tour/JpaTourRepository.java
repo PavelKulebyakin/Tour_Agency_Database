@@ -5,4 +5,6 @@ import ru.mirea.database.data.entity.tour.Tour;
 
 public interface JpaTourRepository
         extends JpaRepository<Tour, Long> {
+
+    Boolean existsByProperty_Id(Long id);
 }

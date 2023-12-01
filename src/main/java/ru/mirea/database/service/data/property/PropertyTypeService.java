@@ -4,14 +4,16 @@ import ru.mirea.database.data.entity.property.PropertyType;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.SortedMap;
 
 public interface PropertyTypeService {
     PropertyType save(PropertyType propertyType);
 
     List<PropertyType> allTypes();
 
-    Optional<PropertyType> getTypeById(Long id) throws NoSuchElementException;
+    PropertyType getTypeById(Long id) throws NoSuchElementException;
 
     void deleteTypeById(Long id);
+
+    SortedMap<String, Long> getNamesMap();
 }
