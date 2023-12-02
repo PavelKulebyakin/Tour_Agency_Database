@@ -6,13 +6,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import ru.mirea.database.data.dto.property.PropertyInputDTO;
-import ru.mirea.database.data.dto.property.PropertyOutputDTO;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import ru.mirea.database.data.dto.property.PropertyDTO;
+import ru.mirea.database.data.entity.location.City;
+import ru.mirea.database.data.entity.property.Owner;
+import ru.mirea.database.data.entity.property.Property;
+import ru.mirea.database.data.entity.property.PropertyType;
+import ru.mirea.database.data.entity.property.TypeOfFood;
 import ru.mirea.database.service.data.property.PropertyService;
 
 import java.util.List;
-import java.util.SortedMap;
 
 @Controller
 public class PropertyController {
@@ -28,29 +34,29 @@ public class PropertyController {
     public String property(Model model) {                                               // TODO: 29.11.2023 change later
 
         Pageable pageable = PageRequest.of(0, 10);
-        Page<PropertyOutputDTO> page = propertyService.findAll(pageable);
-        List<PropertyOutputDTO> properties = page.getContent();
+        Page<Property> page = propertyService.findAll(pageable);
+        List<Property> properties = page.getContent();
         model.addAttribute("properties", properties);
 
-        SortedMap<String, Long> cities = propertyService.getCityNames();
+        List<City> cities = propertyService.getAllCities();
         model.addAttribute("cities", cities);
 
-        SortedMap<String, Long> typesOfFood = propertyService.getFoodTypeNames();
+        List<TypeOfFood> typesOfFood = propertyService.getAllTypesOfFood();
         model.addAttribute("typesOfFood", typesOfFood);
 
-        SortedMap<String, Long> owners = propertyService.getOwnerNames();
+        List<Owner> owners = propertyService.getAllOwners();
         model.addAttribute("owners", owners);
 
-        SortedMap<String, Long> propertyTypes = propertyService.getPropertyTypeNames();
+        List<PropertyType> propertyTypes = propertyService.getAllPropertyTypes();
         model.addAttribute("propertyTypes", propertyTypes);
 
-        model.addAttribute("input", new PropertyInputDTO());
+        model.addAttribute("input", new PropertyDTO());
         return "property";
     }
 
-    @PostMapping("/property/add")
-    public String addProperty(@ModelAttribute PropertyInputDTO propertyInputDTO) {
-        propertyService.save(propertyInputDTO);
+    @PostMapping("/property")
+    public String addProperty(@ModelAttribute PropertyDTO propertyDTO) {
+        propertyService.saveProperty(propertyDTO);
         return "redirect:/property";
     }
 

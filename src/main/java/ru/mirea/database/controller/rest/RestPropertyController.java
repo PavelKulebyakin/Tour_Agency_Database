@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.mirea.database.data.dto.property.PropertyOutputDTO;
+import ru.mirea.database.data.entity.property.Property;
 import ru.mirea.database.service.data.property.PropertyService;
 
 import java.util.List;
@@ -25,10 +25,10 @@ public class RestPropertyController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public List<PropertyOutputDTO> getProperties(@RequestParam(name = "num", required = false, defaultValue = "0") int pageNumber,
-                                                 @RequestParam(name = "size", required = false, defaultValue = "10") int pageSize) {
+    public List<Property> getProperties(@RequestParam(name = "num", required = false, defaultValue = "0") int pageNumber,
+                                        @RequestParam(name = "size", required = false, defaultValue = "10") int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<PropertyOutputDTO> page = propertyService.findAll(pageable);
+        Page<Property> page = propertyService.findAll(pageable);
         return page.getContent();
     }
 

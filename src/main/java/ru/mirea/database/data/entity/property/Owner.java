@@ -36,7 +36,7 @@ public class Owner {
     protected String email;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     protected OwnerType ownerType;
 
     public Owner(String name, String phoneNumber, String email, OwnerType ownerType) {

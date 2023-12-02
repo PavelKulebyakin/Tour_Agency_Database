@@ -2,32 +2,25 @@ package ru.mirea.database.service.data.property;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import ru.mirea.database.data.dto.property.PropertyInputDTO;
-import ru.mirea.database.data.dto.property.PropertyOutputDTO;
+import ru.mirea.database.data.dto.property.PropertyDTO;
 import ru.mirea.database.data.entity.location.City;
+import ru.mirea.database.data.entity.property.Owner;
 import ru.mirea.database.data.entity.property.Property;
+import ru.mirea.database.data.entity.property.PropertyType;
+import ru.mirea.database.data.entity.property.TypeOfFood;
 
 import java.util.List;
-import java.util.SortedMap;
 
 public interface PropertyService {
-
-    Property findById(Long id);
-
-    Page<PropertyOutputDTO> findAll(Pageable pageable);
-
-    void save(PropertyInputDTO propertyInputDTO);
-
-    void deleteById(Long id);
+    Page<Property> findAll(Pageable pageable);
+    void saveProperty(PropertyDTO propertyDTO);
 
     List<City> getAllCities();
 
-    SortedMap<String, Long> getCityNames();
+    List<TypeOfFood> getAllTypesOfFood();
 
-    SortedMap<String, Long> getFoodTypeNames();
+    List<Owner> getAllOwners();
 
-    SortedMap<String, Long> getOwnerNames();
-
-    SortedMap<String, Long> getPropertyTypeNames();
+    List<PropertyType> getAllPropertyTypes();
 
 }
