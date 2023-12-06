@@ -1,12 +1,15 @@
 package ru.mirea.database.data.entity.property;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.mirea.database.annotation.Unique;
 import ru.mirea.database.data.entity.location.City;
 
 import java.util.HashSet;
@@ -18,6 +21,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Data
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 @Table(name = "property")
 public class Property {
@@ -25,11 +29,10 @@ public class Property {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id")
-    @Setter(value = PRIVATE)
+//    @Setter(value = PRIVATE)
     protected Long id;
 
     @NotBlank
-    @Size(max = 20)
     @Column(name = "name")
     protected String name;
 

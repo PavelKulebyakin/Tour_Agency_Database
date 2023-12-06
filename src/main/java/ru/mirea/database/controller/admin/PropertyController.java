@@ -1,15 +1,16 @@
 package ru.mirea.database.controller.admin;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.mirea.database.data.dto.property.PropertyDTO;
 import ru.mirea.database.data.entity.location.City;
 import ru.mirea.database.data.entity.property.Owner;
@@ -21,6 +22,8 @@ import ru.mirea.database.service.data.property.PropertyService;
 import java.util.List;
 
 @Controller
+@Slf4j
+@RequestMapping("/property")
 public class PropertyController {
 
     private final PropertyService propertyService;
@@ -30,39 +33,69 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping("/property")
-    public String property(Model model) {                                               // TODO: 29.11.2023 change later
 
-        Pageable pageable = PageRequest.of(0, 10);
-        Page<Property> page = propertyService.findAll(pageable);
-        List<Property> properties = page.getContent();
-        model.addAttribute("properties", properties);
+    @ModelAttribute("cities")
+    public List<City> cities() {
+        return propertyService.getCities();
+    }
+    @ModelAttribute("typesOfFood")
+    public List<TypeOfFood> typesOfFood() {
+        return propertyService.getTypesOfFood();
+    }
+    @ModelAttribute("owners")
+    public List<Owner> owners() {
+        return propertyService.getOwners();
+    }
+    @ModelAttribute("propertyTypes")
+    public List<PropertyType> propertyTypes() {
+        return propertyService.getPropertyTypes();
+    }
 
-        List<City> cities = propertyService.getAllCities();
-        model.addAttribute("cities", cities);
-
-        List<TypeOfFood> typesOfFood = propertyService.getAllTypesOfFood();
-        model.addAttribute("typesOfFood", typesOfFood);
-
-        List<Owner> owners = propertyService.getAllOwners();
-        model.addAttribute("owners", owners);
-
-        List<PropertyType> propertyTypes = propertyService.getAllPropertyTypes();
-        model.addAttribute("propertyTypes", propertyTypes);
-
-        model.addAttribute("input", new PropertyDTO());
+    @GetMapping
+    public String propertyView(Model model, @RequestParam(name = "error", required = false) boolean error, @RequestParam(name = "save", required = false) boolean save,
+                           @RequestParam(name = "delete", required = false) boolean delete ){
+        Pageable pageable = PageRequest.of(0, 100, Sort.by("name"));
+        model.addAttribute("properties", propertyService.findAll(pageable).getContent());
         return "property";
     }
 
-    @PostMapping("/property")
-    public String addProperty(@ModelAttribute PropertyDTO propertyDTO) {
-        propertyService.saveProperty(propertyDTO);
-        return "redirect:/property";
+    @GetMapping("save")
+    public String saveView(Model model) {
+        PropertyDTO input = new PropertyDTO();
+        model.addAttribute("input", input);
+        return "property_update";
     }
 
-    @PostMapping("/property/delete/{id}")
-    public String deleteProperty(@PathVariable("id") Long id) {
-        propertyService.deleteById(id);
-        return "redirect:/property";
+    @PostMapping("/save")
+    public String saveProperty(Model model, @Valid @ModelAttribute("input") PropertyDTO property/*, BindingResult bindingRest*/) {
+//        if(bindingResult.hasErrors()) {
+//            Pageable pageable = PageRequest.of(0, 10, Sort.by("name"));
+//            model.addAttribute("properties", propertyService.findAll(pageable).getContent());
+//            return "property";
+//        }
+        if(property.getId() == null) {
+            propertyService.save(property);
+        } else {
+            propertyService.update(property);
+        }
+        return "redirect:/property?save=true";
+    }
+
+    @GetMapping("update/{id}")
+    public String updateView(Model model, @PathVariable(name = "id") Long id) {
+        PropertyDTO input = propertyService.findById(id);
+        model.addAttribute("input", input);
+        return "property_update";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteProperty(Model model, @PathVariable("id") Long id) {
+        try{
+            propertyService.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            model.addAttribute("errormessage", "Невозможно удалить сущность с id=" + id);
+            return "redirect:/property?error=true";
+        }
+        return "redirect:/property?delete=true";
     }
 }

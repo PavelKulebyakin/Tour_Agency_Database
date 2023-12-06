@@ -8,7 +8,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String homePage() {
-        return "home";
+        return "modal";
     }
 
 }

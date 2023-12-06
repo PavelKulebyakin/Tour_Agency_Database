@@ -13,5 +13,4 @@ public interface CityService {
 
     void deleteCityById(Long id);
 
-    SortedMap<String, Long> getNamesMap();
 }

@@ -10,4 +10,5 @@ public interface JpaPropertyRepository
 
     Page<Property> findAllBy (Pageable pageable);
 
+    boolean existsByName(String value);
 }

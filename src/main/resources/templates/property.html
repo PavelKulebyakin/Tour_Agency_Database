@@ -1,125 +1,237 @@
 <!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!--Head-->
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <title>Property</title>
 </head>
-
-<body class="container" style="background-color: #f8f9fa">
-
-<h2 class="py-5 text-center">Property Controller</h2>
-
-<form method="post" th:action="@{/property/add}" th:object="${input}" class="col mb-5"> <!--todo add-->
-
-    <div class="form-group">
-        <label for="name">Имя</label>
-        <input id="name" placeholder="Property Name" required type="text" th:field="*{name}"
-               class="form-control"/>
+<style>
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100%;
+    }
+</style>
+<!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title h3">Меню</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-
-    <div class="row">
-        <div class="form-group col-md align-items-start flex-column">
-            <label for="numberOfRoomns">Количество комнат</label>
-            <input id="numberOfRoomns" placeholder="Number of rooms" required type="number" th:field="*{numberOfRooms}"
-                   class="form-control"/>
-        </div>
-        <div class="form-group col-md align-items-start flex-column">
-            <label for="capacity">Вместимость</label>
-            <input id="capacity" placeholder="Capacity" required type="number" th:field="*{capacity}"
-                   class="form-control"/>
-        </div>
+    <div class="offcanvas-body text-center">
+        <!-- Sidebar Content -->
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+        </ul>
     </div>
+</div>
 
-    <div class="row">
-        <div class="form-group col-md align-items-start flex-column">
-            <label for="address">Адрес</label>
-            <input id="address" placeholder="Address" required type="text" th:field="*{address}"
-                   class="form-control"/>
+<!--Body-->
+<body class="bg-light">
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg align-self-center bg-light p-2">
+        <button class="btn text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="col-md"></div>
+        <div class="collapse navbar-collapse justify-content-center col-md">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="navbar-brand text-dark" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand text-dark" href="#">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand text-dark" href="#">Booking</a>
+                </li>
+            </ul>
         </div>
-        <div class="form-group col-md align-items-start flex-column">
-            <label for="City">Город</label>
-            <select id="City" required  th:field="*{cityId}" class="form-control ">
-                <option value="" hidden>Select city</option>
-                <option th:each="c : ${cities}"
-                        th:value="${c.value}"
-                        th:text="${c.key}">
-                </option>
-            </select>
-        </div>
+        <p class="h4 me-3 col-md text-end">Admin</p>
+    </nav>
+</header>
+<div class="container-fluid" style="width:90%">
+    <h3 class="text-center mt-5 mb-5">Таблица недвижимости</h3>
+    <!--    &lt;!&ndash; Кнопка-триггер модального окна &ndash;&gt;
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-plus-square-fill w-25"></i> Добавить недвижимость.
+        </button>-->
+    <!--Save notification-->
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+        Невозможно удалить сущность!
     </div>
-
-    <div class="row">
-        <div class="form-group col-md align-items-start flex-column">
-            <label for="typeOfFood">Тип питания</label>
-            <select id="typeOfFood" required  th:field="*{typeOfFoodId}" class="form-control ">
-                <option value="" hidden>Select type of food</option>
-                <option th:each="p : ${typesOfFood}"
-                        th:value="${p.value}"
-                        th:text="${p.key}">
-                </option>
-            </select>
-        </div>
-
-        <div class="form-group col-md align-items-start flex-column">
-            <label for="propertyType">Тип жилья</label>
-            <select id="propertyType" required  th:field="*{propertyTypeId}" class="form-control ">
-                <option value="" hidden>Select property type</option>
-                <option th:each="pt : ${propertyTypes}"
-                        th:value="${pt.value}"
-                        th:text="${pt.key}">
-                </option>
-            </select>
-        </div>
+    <div th:if="${param.save}" class="alert alert-success" role="alert">
+        Успешно добавлено !
     </div>
-
-    <div class="form-group">
-        <label for="owner">Владелец</label>
-        <select id="owner" required  th:field="*{ownerId}" class="form-control ">
-            <option value="" hidden>Select owner</option>
-            <option th:each="o : ${owners}"
-                    th:value="${o.value}"
-                    th:text="${o.key}">
-            </option>
-        </select>
+    <!--Delete notification-->
+    <div th:if="${param.delete}" class="alert alert-success" role="alert">
+        Успешно удалено !
     </div>
+    <!--Property table-->
+    <div class="database text-center">
+        <table id="table" class="database-table table-borderless table-light table-hover align-middle">
+            <!--Collumn names-->
+            <thead class="database-header">
+            <tr class="h6 p5 mt-4">
+                <th class="col-1">ID</th>
+                <th class="col-2">Имя</th>
+                <th class="col-1">Тип жилья</th>
+                <th class="col-1">Комнаты</th>
+                <th class="col-1">Вместимость</th>
+                <th class="col-2">Адрес</th>
+                <th class="col-1">Город</th>
+                <th class="col-1">Питание</th>
+                <th class="col-2 ">Владелец</th>
+                <th data-orderable="false"></th>
+                <th data-orderable="false"></th>
+            </tr>
+            </thead>
+            <!--Content-->
+            <tbody class="mdc-data-table__content table-bordered">
+            <tr class="mt-4 mb-4" th:each="property : ${properties}">
+                <td th:text="${property.id}"></td>
+                <td th:text="${property.name}"></td>
+                <td th:text="${property.propertyType.name}"></td>
+                <td th:text="${property.numberOfRooms}"></td>
+                <td th:text="${property.capacity}"></td>
+                <td th:text="${property.address}"></td>
+                <td th:text="${property.city.name}"></td>
+                <td th:text="${property.typeOfFood.name}"></td>
+                <td th:text="${property.owner.name}"></td>
+                <td>
+                    <a th:href="@{/property/update/{id} (id=${property.id})}" type="button" class="btn">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+                <td>
+                    <form th:action="@{/property/delete/{id} (id=${property.id})}" class="" method="post">
+                        <button type="submit" class="btn">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+                <!--Filler-->
+            <tr th:if="${#lists.isEmpty(properties)}">
+                <td colspan="11">No Records found. Add some...!</td>
+            </tr>
+            </tbody>
+        </table>
 
-    <input type="submit" class="btn btn-primary mt-3" value="Add Property">
-
-</form>
-
-<table class="table table-hover mb-2">
-    <tr>
-        <th>Имя</th>
-        <th>Адрес</th>
-        <th>Количество комнат</th>
-        <th>Вместимость</th>
-        <th>Город</th>
-        <th>Тип питания</th>
-        <th>Владелец</th>
-        <th>Тип жилья</th>
-        <th>Удалить</th>
-    </tr>
-    <tr th:if="${#lists.isEmpty(properties)}">
-        <td colspan="9">No Records found. Add some...!</td>
-    </tr>
-    <tr th:each="property : ${properties}">
-        <td th:text="${property.name}"></td>
-        <td th:text="${property.address}"></td>
-        <td th:text="${property.numberOfRooms}"></td>
-        <td th:text="${property.capacity}"></td>
-        <td th:text="${property.city}"></td>
-        <td th:text="${property.typeOfFood}"></td>
-        <td th:text="${property.owner}"></td>
-        <td th:text="${property.propertyType}"></td>
-        <td>
-            <form th:if="${#lists.size(properties) > 0}" th:action="@{/property/delete/{id}(id=${property.id})}" method="post">
-                <button type="submit" class="btn btn-outline-danger">Delete</button>
-            </form>
-        </td>
-    </tr>
-</table>
+    </div>
+    <a href="/property/save" type="button" class="btn btn-secondary mt-4 mb-3">
+        <i class="bi bi-plus-square w-25"></i> Добавить недвижимость.
+    </a>
+</div>
+<footer class="mt-auto text-secondary text-center fixed-bottom">
+    <p>&copy; 2023 Your Website Name. All Rights Reserved.</p>
+</footer>
 </body>
 </html>
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable({
+            info: false,
+            columnDefs: [{ "targets": "_all", "className": "text-center" }]
+        });
+    });
+</script>
+
+<!--th:unless="${#lists.size(properties) == 0}" -->
+
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--<div class="form-group">-->
+<!--    <label for="name" class="form-lable">Имя</label>-->
+<!--    <input id="name" class="form-control" required type="text" placeholder="Property Name" minlength="3" maxlength="20"-->
+<!--           th:field="*{name}" th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"/>-->
+<!--    <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:errors="*{name}"></div>-->
+<!--</div>-->
+

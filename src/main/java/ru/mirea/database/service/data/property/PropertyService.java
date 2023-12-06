@@ -5,22 +5,29 @@ import org.springframework.data.domain.Pageable;
 import ru.mirea.database.data.dto.property.PropertyDTO;
 import ru.mirea.database.data.entity.location.City;
 import ru.mirea.database.data.entity.property.Owner;
-import ru.mirea.database.data.entity.property.Property;
 import ru.mirea.database.data.entity.property.PropertyType;
 import ru.mirea.database.data.entity.property.TypeOfFood;
 
 import java.util.List;
 
 public interface PropertyService {
-    Page<Property> findAll(Pageable pageable);
-    void saveProperty(PropertyDTO propertyDTO);
 
-    List<City> getAllCities();
+    Page<PropertyDTO> findAll(Pageable pageable);
 
-    List<TypeOfFood> getAllTypesOfFood();
+    void save(PropertyDTO property);
 
-    List<Owner> getAllOwners();
+    void deleteById(Long id);
 
-    List<PropertyType> getAllPropertyTypes();
+    List<City> getCities();
+
+    List<TypeOfFood> getTypesOfFood();
+
+    List<Owner> getOwners();
+
+    List<PropertyType> getPropertyTypes();
+
+    void update(PropertyDTO property);
+
+    PropertyDTO findById(Long id);
 
 }

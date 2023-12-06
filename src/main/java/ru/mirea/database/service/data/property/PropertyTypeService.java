@@ -15,5 +15,4 @@ public interface PropertyTypeService {
 
     void deleteTypeById(Long id);
 
-    SortedMap<String, Long> getNamesMap();
 }

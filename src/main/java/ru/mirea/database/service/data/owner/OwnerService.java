@@ -15,6 +15,4 @@ public interface OwnerService {
 
     void deleteOwnerById(Long id);
 
-    SortedMap<String, Long> getNamesMap();
-
 }

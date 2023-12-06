@@ -1,14 +1,12 @@
 package ru.mirea.database.service.data.property.impl;
 
 import org.springframework.stereotype.Service;
-import ru.mirea.database.data.dto.NameIdDTO;
 import ru.mirea.database.data.entity.property.TypeOfFood;
 import ru.mirea.database.data.repository.housing.jpa.JpaTypeOfFoodRepository;
 import ru.mirea.database.service.data.property.TypeOfFoodService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.SortedMap;
 
 @Service
@@ -39,8 +37,4 @@ public class TypeOfFoodServiceImpl implements TypeOfFoodService {
         typeOfFoodRepository.deleteById(id);
     }
 
-    @Override
-    public SortedMap<String, Long> getNamesMap() {
-        return NameIdDTO.toSortedMap(typeOfFoodRepository.findAllBy());
-    }
 }

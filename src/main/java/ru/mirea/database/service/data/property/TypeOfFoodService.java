@@ -15,5 +15,4 @@ public interface TypeOfFoodService {
 
     void deleteTypeById(Long id);
 
-    SortedMap<String, Long> getNamesMap();
 }

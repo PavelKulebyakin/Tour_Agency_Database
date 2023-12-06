@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.mirea.database.data.dto.property.PropertyOutputDTO;
 import ru.mirea.database.data.dto.search.SearchCriteriaDTO;
 import ru.mirea.database.data.entity.property.Property;
 import ru.mirea.database.data.repository.housing.castom.PropertySearchRepository;
@@ -25,7 +24,7 @@ public class PropertySearchServiceImpl implements PropertySearchService {
     }
 
     @Override
-    public Page<PropertyOutputDTO> search(SearchCriteriaDTO propertySearchCriteria, Pageable pageable) {
+    public Page<Property> search(SearchCriteriaDTO propertySearchCriteria, Pageable pageable) {
         specificationBuilder.with(propertySearchCriteria.getSearchCriteriaList());
         return repository.findNameAndAddressBy(specificationBuilder.build(), pageable);
     }

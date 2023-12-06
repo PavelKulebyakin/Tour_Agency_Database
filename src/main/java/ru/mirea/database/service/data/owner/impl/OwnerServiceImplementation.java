@@ -1,14 +1,12 @@
 package ru.mirea.database.service.data.owner.impl;
 
 import org.springframework.stereotype.Service;
-import ru.mirea.database.data.dto.NameIdDTO;
 import ru.mirea.database.data.entity.property.Owner;
 import ru.mirea.database.data.repository.housing.jpa.JpaOwnerRepository;
 import ru.mirea.database.service.data.owner.OwnerService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.SortedMap;
 
 @Service
@@ -40,8 +38,4 @@ public class OwnerServiceImplementation implements OwnerService {
         ownerRepository.deleteById(id);
     }
 
-    @Override
-    public SortedMap<String, Long> getNamesMap() {
-        return NameIdDTO.toSortedMap(ownerRepository.findAllBy());
-    }
 }

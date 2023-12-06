@@ -1,7 +1,6 @@
 package ru.mirea.database.service.data.location.impl;
 
 import org.springframework.stereotype.Service;
-import ru.mirea.database.data.dto.NameIdDTO;
 import ru.mirea.database.data.entity.location.City;
 import ru.mirea.database.data.repository.location.JpaCityRepository;
 import ru.mirea.database.service.data.location.CityService;
@@ -36,8 +35,4 @@ public class CityServiceImpl implements CityService {
         cityRepository.deleteById(id);
     }
 
-    @Override
-    public SortedMap<String, Long> getNamesMap() {
-        return NameIdDTO.toSortedMap(cityRepository.findAllBy());
-    }
 }

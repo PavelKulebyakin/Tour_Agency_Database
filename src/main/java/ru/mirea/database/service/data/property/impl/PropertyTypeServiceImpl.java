@@ -1,14 +1,12 @@
 package ru.mirea.database.service.data.property.impl;
 
 import org.springframework.stereotype.Service;
-import ru.mirea.database.data.dto.NameIdDTO;
 import ru.mirea.database.data.entity.property.PropertyType;
 import ru.mirea.database.data.repository.housing.jpa.JpaPropertyTypeRepository;
 import ru.mirea.database.service.data.property.PropertyTypeService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.SortedMap;
 
 @Service
@@ -39,8 +37,4 @@ public class PropertyTypeServiceImpl implements PropertyTypeService {
         repository.deleteById(id);
     }
 
-    @Override
-    public SortedMap<String, Long> getNamesMap() {
-        return NameIdDTO.toSortedMap(repository.findAllBy());
-    }
 }
