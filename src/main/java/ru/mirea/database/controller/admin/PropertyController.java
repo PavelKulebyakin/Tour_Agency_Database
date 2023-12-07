@@ -52,8 +52,8 @@ public class PropertyController {
     }
 
     @GetMapping
-    public String propertyView(Model model, @RequestParam(name = "error", required = false) boolean error, @RequestParam(name = "save", required = false) boolean save,
-                           @RequestParam(name = "delete", required = false) boolean delete ){
+    public String propertyView(Model model/*, @RequestParam(name = "error", required = false) boolean error, @RequestParam(name = "save", required = false) boolean save,
+                           @RequestParam(name = "delete", required = false) boolean delete*/ ){
         Pageable pageable = PageRequest.of(0, 100, Sort.by("name"));
         model.addAttribute("properties", propertyService.findAll(pageable).getContent());
         return "property";
@@ -93,7 +93,7 @@ public class PropertyController {
         try{
             propertyService.deleteById(id);
         } catch (DataIntegrityViolationException e){
-            model.addAttribute("errormessage", "Невозможно удалить сущность с id=" + id);
+//            model.addAttribute("errormessage", "Невозможно удалить сущность с id=" + id);
             return "redirect:/property?error=true";
         }
         return "redirect:/property?delete=true";
