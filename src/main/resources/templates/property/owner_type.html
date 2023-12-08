@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <title>Типы владельцев</title>
+</head>
+
+<style>
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100%;
+    }
+</style>
+
+<!--Body-->
+<body class="bg-light">
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg align-self-center bg-light p-2">
+        <button class="btn text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="col-md"></div>
+        <div class="collapse navbar-collapse justify-content-center col-md">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="navbar-brand text-dark" th:href="@{/home}">Домашняя страница</a>
+                </li>
+            </ul>
+        </div>
+        <p class="h4 me-3 col-md text-end">Админ</p>
+    </nav>
+</header>
+
+<div class="container-fluid" style="width:90%">
+    <h3 class="text-center mt-5 mb-5">Таблица типов владельцев</h3>
+    <!--Save notification-->
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+        Невозможно удалить сущность!
+    </div>
+    <div th:if="${param.save}" class="alert alert-success" role="alert">
+        Успешно добавлено !
+    </div>
+    <!--Delete notification-->
+    <div th:if="${param.delete}" class="alert alert-success" role="alert">
+        Успешно удалено !
+    </div>
+    <!--Property table-->
+    <div class="database text-center">
+        <table id="table" class="database-table table-borderless table-light table-hover align-middle">
+            <!--Collumn names-->
+            <thead class="database-header">
+            <tr class="h6 p5 mt-4">
+                <th class="col-1">ID</th>
+                <th class="col-2">Имя</th>
+                <th data-orderable="false"></th>
+                <th data-orderable="false"></th>
+            </tr>
+            </thead>
+            <!--Content-->
+            <tbody class="mdc-data-table__content table-bordered">
+            <tr class="mt-4 mb-4" th:each="owner_type : ${owner_types}">
+                <td th:text="${owner_type.id}"></td>
+                <td th:text="${owner_type.name}"></td>
+                <td>
+                    <a th:href="@{/owner_type/update/{id} (id=${owner_type.id})}" type="button" class="btn">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+                <td>
+                    <form th:action="@{/owner_type/delete/{id} (id=${owner_type.id})}" class="" method="post">
+                        <button type="submit" class="btn">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+                <!--Filler-->
+            <tr th:if="${#lists.isEmpty(owner_types)}">
+                <td colspan="11">Записи не найдены!</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <a href="/property/save" type="button" class="btn btn-secondary mt-4 mb-3">
+        <i class="bi bi-plus-square w-25"></i> Добавить тип
+    </a>
+</div>
+<footer class="mt-auto text-secondary text-center fixed-bottom">
+    <p>&copy; 2023 Your Website Name. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable({
+            info: false,
+            columnDefs: [{ "targets": "_all", "className": "text-center" }]
+        });
+    });
+</script>
+
+
