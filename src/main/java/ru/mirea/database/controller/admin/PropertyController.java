@@ -54,14 +54,14 @@ public class PropertyController {
                            @RequestParam(name = "delete", required = false) boolean delete*/ ){
         Pageable pageable = PageRequest.of(0, 100, Sort.by("name"));
         model.addAttribute("properties", propertyService.findAll(pageable).getContent());
-        return "property";
+        return "property/property";
     }
 
     @GetMapping("save")
     public String saveView(Model model) {
         PropertyDTO input = new PropertyDTO();
         model.addAttribute("input", input);
-        return "property_update";
+        return "property/property_update";
     }
 
     @PostMapping("/save")
@@ -83,7 +83,7 @@ public class PropertyController {
     public String updateView(Model model, @PathVariable(name = "id") Long id) {
         PropertyDTO input = propertyService.findById(id);
         model.addAttribute("input", input);
-        return "property_update";
+        return "property/property_update";
     }
 
     @PostMapping("/delete/{id}")
