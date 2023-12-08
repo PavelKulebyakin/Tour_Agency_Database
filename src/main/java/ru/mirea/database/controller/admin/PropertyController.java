@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 @Slf4j
-@RequestMapping("/property")
+@RequestMapping("/booking")
 public class PropertyController {
 
     private final PropertyService propertyService;
@@ -30,7 +30,6 @@ public class PropertyController {
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
-
 
     @ModelAttribute("cities")
     public List<City> cities() {
@@ -65,12 +64,7 @@ public class PropertyController {
     }
 
     @PostMapping("/save")
-    public String saveProperty(Model model, @Valid @ModelAttribute("input") PropertyDTO property/*, BindingResult bindingRest*/) {
-//        if(bindingResult.hasErrors()) {
-//            Pageable pageable = PageRequest.of(0, 10, Sort.by("name"));
-//            model.addAttribute("properties", propertyService.findAll(pageable).getContent());
-//            return "property";
-//        }
+    public String saveProperty(Model model, @Valid @ModelAttribute("input") PropertyDTO property) {
         if(property.getId() == null) {
             propertyService.save(property);
         } else {

@@ -1,6 +1,7 @@
 package ru.mirea.database.service.data.booking.impl;
 
 import org.springframework.stereotype.Service;
+import ru.mirea.database.data.dto.booking.ClientDTO;
 import ru.mirea.database.data.entity.booking.Client;
 import ru.mirea.database.data.repository.booking.JpaClientRepository;
 import ru.mirea.database.service.data.booking.ClientService;
@@ -20,8 +21,8 @@ public class ClientServiceImplementation implements ClientService {
 
 
     @Override
-    public Client save(Client client) {
-        return clientRepository.save(client);
+    public Client save(ClientDTO client) {
+        return null;
     }
 
     @Override
@@ -30,16 +31,17 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public Optional<Client> getClientById(Long id) throws NoSuchElementException {
-        Optional<Client> client = clientRepository.findById(id);
-        if(client.isPresent()) {
-            return client;
-        }
-        throw new NoSuchElementException();
+    public ClientDTO getClientById(Long id) throws NoSuchElementException {
+        return null;
     }
 
     @Override
     public void deleteClientById(Long id) {
         clientRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(ClientDTO clientDTO) {
+
     }
 }

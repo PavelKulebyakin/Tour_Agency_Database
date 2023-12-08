@@ -1,5 +1,6 @@
 package ru.mirea.database.service.data.booking.impl;
 
+import ru.mirea.database.data.dto.booking.BookingDTO;
 import ru.mirea.database.data.entity.booking.Booking;
 import ru.mirea.database.service.data.booking.BookingService;
 
@@ -16,7 +17,7 @@ public class BookingServiceImplementation implements BookingService {
     }*/
 
     @Override
-    public Booking save(Booking booking) {
+    public Booking save(BookingDTO booking) {
         return null;
     }
 
@@ -26,12 +27,17 @@ public class BookingServiceImplementation implements BookingService {
     }
 
     @Override
-    public Optional<Booking> getBookingById(Long id) throws NoSuchElementException {
-        return Optional.empty();
+    public BookingDTO getBookingById(Long id) throws NoSuchElementException {
+        return null;
     }
 
     @Override
     public void deleteBookingById(Long id) {
+
+    }
+
+    @Override
+    public void update(BookingDTO bookingDTO) {
 
     }
 }

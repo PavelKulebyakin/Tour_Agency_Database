@@ -1,5 +1,6 @@
 package ru.mirea.database.service.data.booking.impl;
 
+import ru.mirea.database.data.dto.booking.BookingStatusDTO;
 import ru.mirea.database.data.entity.booking.BookingStatus;
 import ru.mirea.database.data.repository.booking.JpaBookingStatusRepository;
 import ru.mirea.database.service.data.booking.BookingStatusService;
@@ -17,8 +18,8 @@ public class BookingStatusServiceImplementation implements BookingStatusService 
     }
 
     @Override
-    public BookingStatus save(BookingStatus bookingStatus) {
-        return bookingStatusRepository.save(bookingStatus);
+    public BookingStatus save(BookingStatusDTO bookingStatus) {
+        return null;
     }
 
     @Override
@@ -27,16 +28,17 @@ public class BookingStatusServiceImplementation implements BookingStatusService 
     }
 
     @Override
-    public Optional<BookingStatus> getStatusById(Long id) throws NoSuchElementException {
-        Optional<BookingStatus> status = bookingStatusRepository.findById(id);
-        if (status.isPresent()) {
-            return status;
-        }
-        throw new NoSuchElementException();
+    public BookingStatusDTO getStatusById(Long id) throws NoSuchElementException {
+        return null;
     }
 
     @Override
     public void deleteStatusById(Long id) {
         bookingStatusRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(BookingStatusDTO bookingStatus) {
+
     }
 }

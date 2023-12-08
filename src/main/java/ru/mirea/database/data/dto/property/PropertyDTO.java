@@ -24,5 +24,4 @@ public class PropertyDTO {
     protected City city;
     protected Owner owner;
     protected PropertyType propertyType;
-
 }

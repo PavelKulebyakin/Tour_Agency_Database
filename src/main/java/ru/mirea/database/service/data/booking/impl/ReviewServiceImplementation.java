@@ -1,5 +1,6 @@
 package ru.mirea.database.service.data.booking.impl;
 
+import ru.mirea.database.data.dto.booking.ReviewDTO;
 import ru.mirea.database.data.entity.booking.Review;
 import ru.mirea.database.service.data.booking.ReviewService;
 
@@ -15,7 +16,7 @@ public class ReviewServiceImplementation implements ReviewService {
     }*/
 
     @Override
-    public Review save(Review review) {
+    public Review save(ReviewDTO review) {
         return null;
     }
 
@@ -25,12 +26,17 @@ public class ReviewServiceImplementation implements ReviewService {
     }
 
     @Override
-    public Optional<Review> getReviewById(Long id) throws NoSuchElementException {
-        return Optional.empty();
+    public ReviewDTO getReviewById(Long id) throws NoSuchElementException {
+        return null;
     }
 
     @Override
     public void deleteReviewById(Long id) {
+
+    }
+
+    @Override
+    public void update(ReviewDTO review) {
 
     }
 }

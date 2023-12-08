@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <title>Отзывы</title>
+</head>
+<style>
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100%;
+    }
+</style>
+
+<!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title h3">Меню</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body text-center">
+        <!-- Sidebar Content -->
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--Body-->
+<body class="bg-light">
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg align-self-center bg-light p-2">
+        <button class="btn text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="col-md"></div>
+        <div class="collapse navbar-collapse justify-content-center col-md">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="navbar-brand text-dark" href="#">Home</a>
+                </li>
+<!--                <li class="nav-item">
+                    <a class="navbar-brand text-dark" href="#">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand text-dark" href="#">Booking</a>
+                </li>-->
+            </ul>
+        </div>
+        <p class="h4 me-3 col-md text-end">Admin</p>
+    </nav>
+</header>
+
+<div class="container-fluid" style="width:90%">
+    <h3 class="text-center mt-5 mb-5">Таблица отзывов</h3>
+    <!--    &lt;!&ndash; Кнопка-триггер модального окна &ndash;&gt;
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-plus-square-fill w-25"></i> Добавить отзыв.
+        </button>-->
+    <!--Save notification-->
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+        Невозможно удалить сущность!
+    </div>
+    <div th:if="${param.save}" class="alert alert-success" role="alert">
+        Успешно добавлено !
+    </div>
+    <!--Delete notification-->
+    <div th:if="${param.delete}" class="alert alert-success" role="alert">
+        Успешно удалено !
+    </div>
+    <!--Property table-->
+    <div class="database text-center">
+        <table id="table" class="database-table table-borderless table-light table-hover align-middle">
+            <!--Collumn names-->
+            <thead class="database-header">
+            <tr class="h6 p5 mt-4">
+                <th class="col-1">ID</th>
+                <th class="col-2">Бронирование</th>
+                <th class="col-1">Оценка</th>
+                <th class="col-2">Текст отзыва</th>
+                <th class="col-1">Дата</th>
+                <th data-orderable="false"></th>
+                <th data-orderable="false"></th>
+            </tr>
+            </thead>
+            <!--Content-->
+            <tbody class="mdc-data-table__content table-bordered">
+            <tr class="mt-4 mb-4" th:each="property : ${properties}">
+                <td th:text="${review.id}"></td>
+                <td th:text="${review.rating}"></td>
+                <td th:text="${review.booking.id}"></td>
+                <td th:text="${review.text}"></td>
+                <td th:text="${review.date}"></td>
+                <td>
+                    <a th:href="@{/review/update/{id} (id=${review.id})}" type="button" class="btn">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+                <td>
+                    <form th:action="@{/review/delete/{id} (id=${review.id})}" class="" method="post">
+                        <button type="submit" class="btn">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+                <!--Filler-->
+            <tr th:if="${#lists.isEmpty(properties)}">
+                <td colspan="11">No Records found. Add some...!</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <a href="/review/save" type="button" class="btn btn-secondary mt-4 mb-3">
+        <i class="bi bi-plus-square w-25"></i> Добавить отзыв.
+    </a>
+</div>
+<footer class="mt-auto text-secondary text-center fixed-bottom">
+    <p>&copy; 2023 Your Website Name. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable({
+            info: false,
+            columnDefs: [{ "targets": "_all", "className": "text-center" }]
+        });
+    });
+</script>
+
+<!--th:unless="${#lists.size(properties) == 0}" -->
+
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--<div class="form-group">-->
+<!--    <label for="name" class="form-lable">Имя</label>-->
+<!--    <input id="name" class="form-control" required type="text" placeholder="Property Name" minlength="3" maxlength="20"-->
+<!--           th:field="*{name}" th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"/>-->
+<!--    <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:errors="*{name}"></div>-->
+<!--</div>-->
+
