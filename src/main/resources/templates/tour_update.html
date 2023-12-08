@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <title>Tour Update</title>
+</head>
+
+<!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title h3">Меню</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body text-center">
+        <!-- Sidebar Content -->
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">About</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Services</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="h5 text-decoration-none" href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--Body-->
+<body class="bg-light">
+
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg align-self-center bg-light p-2">
+        <button class="btn text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="col-md"></div>
+        <div class="collapse navbar-collapse justify-content-center col-md">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="navbar-brand text-dark" href="#">Tour</a>
+                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="navbar-brand text-dark" href="#">Search</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="navbar-brand text-dark" href="#">Booking</a>-->
+<!--                </li>-->
+            </ul>
+        </div>
+        <p class="h4 me-3 col-md text-end">Admin</p>
+    </nav>
+</header>
+
+<div class="container  mt-5">
+    <form method="post" th:action="@{/tour/save}" th:object="${input}" class="mx-auto needs-validation my-auto"
+          novalidate="novalidate">
+        <div class="align-items-center col-8 col-md mx-auto">
+            <input id="id" hidden th:field="*{id}">
+            <!--Name-->
+            <div class="form-group mb-3">
+                <!--Input-->
+                <label for="name" class="form-lable">Название</label>
+                <input id="name" class="form-control" required type="text" placeholder="Name"
+                       minlength="3"
+                       maxlength="20" th:field="*{name}"/>
+                <!--Invalid feedback-->
+                <div class="invalid-feedback">Пожалуйста, укажите название.</div>
+            </div>
+
+            <div class="row">
+
+                <!--Price-->
+                <div class="form-group col-md align-items-start flex-column mb-3">
+                    <!--Input-->
+                    <label for="price">Цена</label>
+                    <input id="price" class="form-control" placeholder="Price" required
+                           type="number"
+                           min="1" max="10000"
+                           th:field="*{price}"/>
+                    <!--Invalid feedback-->
+                    <div class="invalid-feedback">Пожалуйста, укажите цену.</div>
+                </div>
+
+                <!--Tour type-->
+                <div class="form-group col-md align-items-start flex-column mb-3">
+                    <!--Input-->
+                    <label for="tourType">Тип тура</label>
+                    <select id="tourType" class="form-control " required th:field="*{tourType}">
+                        <option value="" hidden>Select tour type</option>
+                        <option th:each="p : ${tourType}" th:value="${p.id}"
+                                th:text="${p.name}"></option>
+                    </select>
+                    <!--Invalid feedback-->
+                    <div class="invalid-feedback">Пожалуйста, укажите тип тура.</div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!--Start date-->
+                <div class="form-group col-md align-items-start flex-column mb-3">
+                    <!--Date-->
+                    <label for="startDate">Дата начала тура</label>
+                    <input type="date" id="startDate" class="form-control" placeholder="Start Date" required
+                           th:field="*{startDate}"/>
+                    <!--Invalid feedback-->
+                    <div class="invalid-feedback">Пожалуйста, укажите дату начала тура.</div>
+                </div>
+
+                <!--End date-->
+                <div class="form-group col-md align-items-start flex-column mb-3">
+                    <!--Date-->
+                    <label for="endDate">Тип жилья</label>
+                    <input type="date" id="endDate" class="form-control" placeholder="End Date" required
+                           th:field="*{endDate}"/>
+                    <!--Invalid feedback-->
+                    <div class="invalid-feedback">Пожалуйста, укажите дату конца тура.</div>
+                </div>
+
+                <div class="row">
+
+                    <!--Property-->
+                    <div class="form-group col-md align-items-start flex-column mb-3">
+                        <!--Select-->
+                        <label for="property">Собственность</label>
+                        <select id="property" class="form-control " required th:field="*{property}">
+                            <option value="" hidden>Select property</option>
+                            <option th:each="p : ${property}" th:value="${p.id}"
+                                    th:text="${p.name}"></option>
+                        </select>
+                        <!--Invalid feedback-->
+                        <div class="invalid-feedback">Пожалуйста, выберите собственность.</div>
+                    </div>
+
+                    <!--Tour company-->
+                    <div class="form-group col-md align-items-start flex-column mb-3">
+                        <!--Select-->
+                        <label for="tourCompany">Туроператор</label>
+                        <select id="tourCompany" class="form-control " required th:field="*{tourCompany}">
+                            <option value="" hidden>Select tour company</option>
+                            <option th:each="p : ${tourCompany}" th:value="${p.id}"
+                                    th:text="${p.name}"></option>
+                        </select>
+                        <!--Invalid feedback-->
+                        <div class="invalid-feedback">Пожалуйста, выберите туроператора.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <input type="submit" class="btn btn-primary mt-2" value="Подтвердить">
+        </div>
+
+    </form>
+</div>
+
+<footer class="mt-auto text-secondary text-center fixed-bottom">
+    <p>&copy; 2023 Your Website Name. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--Castom validation script-->
+<script>
+
+    $(document).ready(function () {
+        var form = $('.needs-validation');
+
+        form.on('submit', function (event) {
+            if (!form[0].checkValidity()) {
+                $('.feedback').show();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.addClass('was-validated');
+        });
+    });
+</script>
+
